@@ -1,0 +1,24 @@
+<nz-layout class="layout" *ngIf="($authStatus | async) else landing">
+  <nz-header>
+    <app-header></app-header>
+  </nz-header>
+  <nz-layout>
+    <nz-sider nzCollapsible [(nzCollapsed)]="isCollapsed" [nzBreakpoint]="'lg'" [nzCollapsedWidth]="0"
+              [nzZeroTrigger]="zeroTrigger" nzTheme="light">
+      <app-sidebar></app-sidebar>
+    </nz-sider>
+    <nz-content>
+      <div class="content">
+        <router-outlet></router-outlet>
+      </div>
+    </nz-content>
+  </nz-layout>
+</nz-layout>
+
+<ng-template #landing>
+  <router-outlet></router-outlet>
+</ng-template>
+
+<ng-template #zeroTrigger>
+  <i nz-icon nzType="menu-fold" nzTheme="outline"></i>
+</ng-template>

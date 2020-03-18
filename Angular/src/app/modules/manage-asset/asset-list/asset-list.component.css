@@ -1,0 +1,7 @@
+.ant-table-thead > tr > th {
+  background-color: greenyellow;
+}
+
+tr.ant-table-row {
+  background-color: aliceblue;
+}

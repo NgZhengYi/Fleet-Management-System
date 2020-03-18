@@ -1,0 +1,28 @@
+.layout {
+  height: 100%;
+  width: 100%;
+}
+
+.ant-layout-header {
+  background: #fff;
+  padding: 0;
+  height: 7.5vh;
+  line-height: 7.5vh;
+}
+
+.ant-layout-content {
+  margin: 10px;
+  overflow: hidden;
+}
+
+.content {
+  padding: 10px;
+  background: #fff;
+  height: 100%;
+  width: 100%;
+  overflow-y: scroll;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}

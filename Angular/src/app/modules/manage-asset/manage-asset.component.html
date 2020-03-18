@@ -1,0 +1,8 @@
+<div class="container-fluid">
+  <app-asset-list></app-asset-list>
+  <button nz-button nzType="primary" (click)="displayModal()">INSERT</button>
+
+  <nz-modal [(nzVisible)]="modalVisible" (nzOnOk)="submitModal()" (nzOnCancel)="cancelModal()">
+    <app-insert-form></app-insert-form>
+  </nz-modal>
+</div>
