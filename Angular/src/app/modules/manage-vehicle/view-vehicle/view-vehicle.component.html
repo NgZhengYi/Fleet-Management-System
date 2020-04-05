@@ -1,0 +1,38 @@
+<div class="title-container">
+  <span>Vehicle List</span>
+</div>
+<div class="content-container">
+  <nz-table #table nzBordered [nzData]="dataSet" [nzPageSize]="10" [nzLoading]="loading" nzSize="middle">
+    <thead>
+    <tr>
+      <th>CODE</th>
+      <th>NAME</th>
+      <th>TYPE</th>
+      <th>PLATE</th>
+      <th>STATUS</th>
+      <th>ACTION</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let vehicle of table.data">
+      <td>{{ vehicle.vehicle_code }}</td>
+      <td>{{ vehicle.vehicle_name }}</td>
+      <td>{{ vehicle.vehicle_type }}</td>
+      <td>{{ vehicle.vehicle_plate }}</td>
+      <td>{{ vehicle.vehicle_status }}</td>
+      <td>
+        <a routerLink="/manage-vehicle/update-vehicle/{{vehicle.auto_id}}"
+           [queryParams]="{CODE : vehicle.vehicle_code, NAME : vehicle.vehicle_name, TYPE : vehicle.vehicle_type,
+            PLATE : vehicle.vehicle_plate, STATUS : vehicle.vehicle_status}">
+          Edit
+        </a>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</div>
+<div class="action-container">
+  <button nz-button nzType="default" routerLink="/manage-vehicle/insert-vehicle" class="button-margin">New Vehicle
+  </button>
+  <button nz-button nzType="default" routerLink="/manage-vehicle" class="button-margin">Back</button>
+</div>

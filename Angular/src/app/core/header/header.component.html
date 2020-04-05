@@ -1,11 +1,14 @@
-<div class="logo"></div>
+<div class="title">
+  <span class="span-text">Fleet Management System</span>
+</div>
+
 <ul nz-menu nzMode="horizontal" nzTheme="dark">
-  <li (click)="onLogoutClicked()" nz-menu-item style="float: right">
+  <li (click)="onLogoutClicked()" nz-menu-item style="float: right" class="span-text">
     <i nz-icon nzType="logout"></i>
     <span>Logout</span>
   </li>
   <li nz-menu-item style="float: right">
-    <a class="active" routerLink="/profile">
+    <a class="active span-text" routerLink="/profile">
       <i nz-icon nzType="profile"></i>
       <span>Profile</span>
     </a>

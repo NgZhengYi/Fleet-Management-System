@@ -27,8 +27,8 @@ const routes: Routes = [
     canActivate: [AuthGuard]
   },
   {
-    path: 'manage-asset',
-    loadChildren: () => import('./modules/manage-asset/manage-asset.module').then(m => m.ManageAssetModule),
+    path: 'manage-vehicle',
+    loadChildren: () => import('./modules/manage-vehicle/manage-vehicle.module').then(m => m.ManageVehicleModule),
     canActivate: [AuthGuard],
     data: {role: 'Admin'}
   },

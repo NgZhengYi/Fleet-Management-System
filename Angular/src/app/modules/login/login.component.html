@@ -1,21 +1,21 @@
 <div class="container">
   <form nz-form [formGroup]="formGroup" [nzLayout]="'vertical'" class="login-form" (ngSubmit)="submitForm()">
     <nz-form-item>
-      <nz-form-control nzErrorTip="Please input your username!">
+      <nz-form-control nzSpan="18" nzOffset="3" nzErrorTip="Please input your username!">
         <nz-input-group nzPrefixIcon="user">
             <input type="text" nz-input formControlName="username" placeholder="Username"/>
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-control nzErrorTip="Please input your Password!">
+      <nz-form-control nzSpan="18" nzOffset="3" nzErrorTip="Please input your Password!">
         <nz-input-group nzPrefixIcon="lock">
             <input type="password" nz-input formControlName="password" placeholder="Password"/>
         </nz-input-group>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <nz-form-control>
+      <nz-form-control nzOffset="3">
         <label nz-checkbox formControlName="remember">
           <span>Remember Me</span>
         </label>
@@ -23,8 +23,10 @@
       </nz-form-control>
     </nz-form-item>
     <nz-form-item>
-      <button nz-button class="login-form-button" nzType="primary">LOGIN</button>
-      <a nz-button nzType="link" routerLink="/">CANCEL</a>
+      <nz-form-control nzSpan="18" nzOffset="3">
+        <button nz-button class="login-form-button" nzType="primary">LOGIN</button>
+        <a nz-button nzType="dashed" routerLink="/">CANCEL</a>
+      </nz-form-control>
     </nz-form-item>
   </form>
 </div>

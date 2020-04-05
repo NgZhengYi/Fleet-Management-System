@@ -23,6 +23,7 @@ export class AuthService {
           localStorage.setItem('Fleet Management System', JSON.stringify(value.result));
           this.$authStatus.next(true);
         }
+        console.log('Error');
         return value.message;
       })
     );
@@ -43,7 +44,7 @@ export class AuthService {
       return of('False');
     } else {
       const token = storage.token;
-      console.log(token);
+      // console.log(token);
 
       return this.http.post<{ message: string }>(
         environment.nodeUrl + '/account/ValidateToken', {token}

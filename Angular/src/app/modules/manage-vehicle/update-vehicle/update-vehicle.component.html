@@ -1,0 +1,51 @@
+<div class="title-container">
+  <span>Update Vehicle</span>
+</div>
+<form nz-form [nzLayout]="layout" [formGroup]="formGroup" (ngSubmit)="submitForm()">
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4">Vehicle Code</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzErrorTip="Please Insert Vehicle Code" nzHasFeedback>
+      <input nz-input formControlName="vehicle_code" placeholder="Vehicle Name"/>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4">Vehicle Name</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzErrorTip="Please Insert Vehicle Name" nzHasFeedback>
+      <input nz-input formControlName="vehicle_name" placeholder="Vehicle Name">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4">Vehicle Plate</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzErrorTip="Please Insert Vehicle Plate" nzHasFeedback>
+      <input nz-input formControlName="vehicle_plate" placeholder="Vehicle Plate">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4">Vehicle Type</nz-form-label>
+    <nz-form-control [nzSpan]="14" nzErrorTip="Please Select Vehicle Type" nzHasFeedback>
+      <nz-select formControlName="vehicle_type" nzPlaceHolder="Select Vehicle Type">
+        <nz-option nzValue="Big" nzLabel="BIG"></nz-option>
+        <nz-option nzValue="Medium" nzLabel="MEDIUM"></nz-option>
+        <nz-option nzValue="Small" nzLabel="SMALL"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4">Vehicle Status</nz-form-label>
+    <nz-form-control [nzSpan]="14">
+      <nz-select formControlName="vehicle_status">
+        <nz-option nzValue="Available" nzLabel="AVAILABLE"></nz-option>
+        <nz-option nzValue="Mission" nzLabel="MISSION"></nz-option>
+        <nz-option nzValue="Maintenance" nzLabel="MAINTENANCE"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-control nzOffset="4">
+      <button nz-button nzType="primary" class="button-margin">Update</button>
+      <button nz-button nzType="default" class="button-margin" routerLink="/manage-vehicle/view-vehicle">
+        Cancel
+      </button>
+    </nz-form-control>
+  </nz-form-item>
+</form>
