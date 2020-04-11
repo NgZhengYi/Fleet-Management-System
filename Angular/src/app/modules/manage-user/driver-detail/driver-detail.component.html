@@ -1,0 +1,66 @@
+<div class="title-container">
+  <span>Driver Detail</span>
+</div>
+
+<div class="content-container">
+  <nz-spin class="spinner-cover" nzSize="large" [nzSpinning]="loading">
+    <div *ngIf="FormReady">
+      <form nz-form [nzLayout]="'horizontal'" [formGroup]="DriverDetailFormGroup" (ngSubmit)="updateForm()">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="4" nzRequired>Driver Code</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <input nz-input type="text" formControlName="driver_code">
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="4" nzRequired>Driver Name</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <input nz-input type="text" formControlName="driver_name">
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="4" nzRequired>Driver License</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <input nz-input type="text" formControlName="driver_license">
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="4" nzRequired>Driver Skill</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <input nz-input type="text" formControlName="driver_skill_level">
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="4" nzRequired>Driver Status</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <nz-select formControlName="driver_status">
+              <nz-option nzValue="Available" nzLabel="AVAILABLE"></nz-option>
+              <nz-option nzValue="Not Available" nzLabel="NOT AVAILABLE"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="4">Driver Vehicle</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <input nz-input type="text" formControlName="driver_vehicle" [nzAutocomplete]="autocomplete"
+                   (input)="onAutoCompleteInput($event.target?.value)">
+            <nz-autocomplete nzBackfill #autocomplete>
+              <nz-auto-option *ngFor="let option of options | slice : 0 : 4" [nzValue]="option.auto_id">
+                {{option.vehicle_code}}
+              </nz-auto-option>
+            </nz-autocomplete>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzOffset="4">
+            <button nz-button type="submit" nzType="primary" class="button-margin">Update</button>
+            <button nz-button type="button" nzType="default" class="button-margin" routerLink="/manage-user"
+                    [queryParams]="{TAB_INDEX : 1}">
+              Back
+            </button>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </div>
+  </nz-spin>
+</div>

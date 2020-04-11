@@ -37,6 +37,24 @@ const routes: Routes = [
     loadChildren: () => import('./modules/manage-user/manage-user.module').then(m => m.ManageUserModule),
     canActivate: [AuthGuard],
     data: {role: 'Admin'}
+  },
+  {
+    path: 'manage-task',
+    loadChildren: () => import('./modules/manage-task/manage-task.module').then(m => m.ManageTaskModule),
+    canActivate: [AuthGuard],
+    data: {role: 'Admin'}
+  },
+  {
+    path: 'manage-maintenance',
+    loadChildren: () => import('./modules/manage-maintenance/manage-maintenance.module').then(m => m.ManageMaintenanceModule),
+    canActivate: [AuthGuard],
+    data: {role: 'Admin'}
+  },
+  {
+    path: 'manage-cost',
+    loadChildren: () => import('./modules/manage-cost/manage-cost.module').then(m => m.ManageCostModule),
+    canActivate: [AuthGuard],
+    data: {role: 'Admin'}
   }
 ];
 

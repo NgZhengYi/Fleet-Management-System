@@ -1,0 +1,23 @@
+<div class="title-container">
+  <span>Task History</span>
+</div>
+
+<div class="content-container">
+  <cdk-virtual-scroll-viewport itemSize="50" class="scroll-viewport">
+    <nz-list nzSize="small" nzBordered>
+      <nz-list-item *cdkVirtualFor="let item of HistoryData" [nzActions]="[HistoryAction]" [nzExtra]="HistoryDate">
+        <nz-list-item-meta nzTitle="{{item.task_title}}" nzDescription="[{{item.task_status | uppercase}}] {{item.task_detail}}"></nz-list-item-meta>
+        <ng-template #HistoryAction>
+          <a routerLink="/manage-task/task-history/view" [queryParams]="{AUTO_IDENTITY: item.auto_id}">VIEW</a>
+        </ng-template>
+        <ng-template #HistoryDate>
+          {{item.task_date | slice : 0 : 10}}
+        </ng-template>
+      </nz-list-item>
+    </nz-list>
+  </cdk-virtual-scroll-viewport>
+</div>
+
+<div class="action-container">
+  <button nz-button nzType="default" routerLink="/manage-task" class="button-margin">Back</button>
+</div>

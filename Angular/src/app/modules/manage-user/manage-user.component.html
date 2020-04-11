@@ -2,15 +2,15 @@
   <span>Manage User Account</span>
 </div>
 <div class="content-container">
-  <nz-tabset>
+  <nz-tabset [nzSelectedIndex]="null ? 0 : currentTabIndex">
     <nz-tab nzTitle="Register Account">
       <app-create-account></app-create-account>
     </nz-tab>
     <nz-tab nzTitle="Driver List">
-      Driver
+      <app-driver-list></app-driver-list>
     </nz-tab>
     <nz-tab nzTitle="Workshop List">
-      Workshop
+      <app-workshop-list></app-workshop-list>
     </nz-tab>
   </nz-tabset>
 </div>

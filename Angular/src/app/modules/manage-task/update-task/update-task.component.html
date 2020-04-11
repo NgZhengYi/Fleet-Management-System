@@ -1,0 +1,63 @@
+<div class="title-container">
+  <span>Task</span>
+</div>
+
+<nz-spin class="spinner-cover" nzSize="large" [nzSpinning]="loading">
+  <div *ngIf="FormReady">
+    <form nz-form [nzLayout]="'horizontal'" [formGroup]="TaskFormGroup" (ngSubmit)="updateForm()">
+      <nz-form-item>
+        <nz-form-label [nzSpan]="4" nzRequired>Task Title</nz-form-label>
+        <nz-form-control [nzSpan]="16">
+          <input nz-input type="text" formControlName="task_title">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="4">Task Detail</nz-form-label>
+        <nz-form-control [nzSpan]="16">
+          <textarea nz-input formControlName="task_detail" size="4"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="4" nzRequired>Task Date</nz-form-label>
+        <nz-form-control [nzSpan]="16">
+          <input nz-input type="date" formControlName="task_date">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="4" nzRequired>Task Time</nz-form-label>
+        <nz-form-control [nzSpan]="16">
+          <input nz-input type="time" formControlName="task_time">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="4" nzRequired>Origin Location</nz-form-label>
+        <nz-form-control [nzSpan]="16">
+          <input nz-input type="text" formControlName="task_origin_location">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="4" nzRequired>Destination Location</nz-form-label>
+        <nz-form-control [nzSpan]="16">
+          <input nz-input type="text" formControlName="task_destination_location">
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-label [nzSpan]="4">Task Driver</nz-form-label>
+        <nz-form-control [nzSpan]="16">
+          <input nz-input type="text" formControlName="task_driver" [nzAutocomplete]="autocomplete" (input)="onAutoCompleteInput($event.target?.value)">
+          <nz-autocomplete nzBackfill #autocomplete>
+            <nz-auto-option *ngFor="let option of options | slice : 0 : 4" [nzValue]="option.auto_id">
+              {{option.driver_code}}
+            </nz-auto-option>
+          </nz-autocomplete>
+        </nz-form-control>
+      </nz-form-item>
+      <nz-form-item>
+        <nz-form-control nzOffset="4">
+          <button nz-button nzType="primary" class="button-margin" type="submit">Submit</button>
+          <button nz-button nzType="default" class="button-margin" routerLink="/manage-task">Back</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+</nz-spin>

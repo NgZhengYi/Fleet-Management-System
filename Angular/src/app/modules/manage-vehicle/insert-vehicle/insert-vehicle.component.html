@@ -1,6 +1,7 @@
 <div class="title-container">
   <span>New Vehicle</span>
 </div>
+
 <form nz-form nzLayout="horizontal" [formGroup]="formGroup" (ngSubmit)="submitForm()">
   <nz-form-item>
     <nz-form-label [nzSpan]="4">Vehicle Code</nz-form-label>
@@ -35,9 +36,6 @@
       <button nz-button nzType="primary" class="button-margin">Submit</button>
       <button nz-button nzType="default" class="button-margin" type="reset">Clear</button>
       <button nz-button nzType="default" class="button-margin" routerLink="/manage-vehicle">Back</button>
-      <button nz-button nzType="default" class="button-margin" routerLink="/manage-vehicle/view-vehicle">
-        Vehicle List
-      </button>
     </nz-form-control>
   </nz-form-item>
 </form>

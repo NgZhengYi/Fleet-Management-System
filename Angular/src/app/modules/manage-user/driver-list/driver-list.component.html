@@ -1,0 +1,22 @@
+<nz-table #table nzBordered [nzData]="driverList" [nzPageSize]="10" [nzLoading]="loading" nzSize="small">
+  <thead>
+  <tr>
+    <th class="table-header-style">DRIVER CODE</th>
+    <th class="table-header-style">DRIVER NAME</th>
+    <th class="table-header-style">VEHICLE CODE</th>
+    <th class="table-header-style">VEHICLE NAME</th>
+    <th class="table-header-style">ACTION</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let item of table.data">
+    <td>{{item.driver_code}}</td>
+    <td>{{item.driver_name}}</td>
+    <td>{{item.vehicle_code}}</td>
+    <td>{{item.vehicle_name}}</td>
+    <td class="text-center">
+      <a routerLink="/manage-user/driver-detail" [queryParams]="{AUTO_IDENTITY: item.auto_id}">UPDATE | VIEW</a>
+    </td>
+  </tr>
+  </tbody>
+</nz-table>

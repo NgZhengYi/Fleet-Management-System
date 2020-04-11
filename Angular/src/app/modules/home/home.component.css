@@ -1,0 +1,22 @@
+.home-container {
+  height: 100%;
+  width: 100%;
+}
+
+.row-height {
+  height: 33.33%;
+}
+
+.col-md-4 {
+  margin: 0.25%;
+  flex: unset;
+}
+
+.cover {
+  width: 100%;
+  height: 100%;
+}
+
+.box-shadow {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}

@@ -1,19 +1,31 @@
 <form nz-form [nzLayout]="layout" [formGroup]="AccountFormGroup" (ngSubmit)="submitForm()">
   <nz-form-item>
-    <nz-form-label [nzSpan]="4">Username</nz-form-label>
-    <nz-form-control [nzSpan]="14">
+    <nz-form-label [nzSpan]="4" nzRequired>Username</nz-form-label>
+    <nz-form-control [nzSpan]="16">
       <input nz-input type="text" formControlName="username" placeholder="Username">
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSpan]="4">Password</nz-form-label>
-    <nz-form-control [nzSpan]="14">
+    <nz-form-label [nzSpan]="4" nzRequired>Password</nz-form-label>
+    <nz-form-control [nzSpan]="16">
       <input nz-input type="password" formControlName="password" placeholder="Password">
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label [nzSpan]="4">Role</nz-form-label>
-    <nz-form-control [nzSpan]="14">
+    <nz-form-label [nzSpan]="4">Email</nz-form-label>
+    <nz-form-control [nzSpan]="16">
+      <input nz-input type="email" formControlName="email" placeholder="Email">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4">Phone</nz-form-label>
+    <nz-form-control [nzSpan]="16">
+      <input nz-input type="number" formControlName="phone" placeholder="Phone">
+    </nz-form-control>
+  </nz-form-item>
+  <nz-form-item>
+    <nz-form-label [nzSpan]="4" nzRequired>Role</nz-form-label>
+    <nz-form-control [nzSpan]="16">
       <nz-select formControlName="role" nzPlaceHolder="Role" (ngModelChange)="displayRoleFields($event)">
         <nz-option nzValue="ADMIN" nzLabel="Administrator"></nz-option>
         <nz-option nzValue="DRIVER" nzLabel="Driver"></nz-option>
@@ -26,25 +38,25 @@
     <form nz-form [nzLayout]="layout" [formGroup]="DetailFormGroup">
       <nz-form-item>
         <nz-form-label [nzSpan]="4">Driver Code</nz-form-label>
-        <nz-form-control [nzSpan]="14">
+        <nz-form-control [nzSpan]="16">
           <input nz-input type="text" formControlName="driver_code" placeholder="Driver Code">
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label [nzSpan]="4">Driver Name</nz-form-label>
-        <nz-form-control [nzSpan]="14">
+        <nz-form-control [nzSpan]="16">
           <input nz-input type="text" formControlName="driver_name" placeholder="Driver Name">
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label [nzSpan]="4">Driver License</nz-form-label>
-        <nz-form-control [nzSpan]="14">
+        <nz-form-control [nzSpan]="16">
           <input nz-input type="text" formControlName="driver_license" placeholder="Driver License">
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label [nzSpan]="4">Driver Skill Experience</nz-form-label>
-        <nz-form-control [nzSpan]="14">
+        <nz-form-control [nzSpan]="16">
           <nz-select formControlName="driver_skill_level" nzPlaceHolder="Driver Skill">
             <nz-option nzValue="A" nzLabel="A"></nz-option>
             <nz-option nzValue="B" nzLabel="B"></nz-option>
@@ -60,19 +72,19 @@
     <form nz-form [nzLayout]="layout" [formGroup]="DetailFormGroup" (ngSubmit)="submitForm()">
       <nz-form-item>
         <nz-form-label nzSpan="4">Workshop Code</nz-form-label>
-        <nz-form-control [nzSpan]="14">
+        <nz-form-control [nzSpan]="16">
           <input nz-input type="text" formControlName="workshop_code" placeholder="WorkShop Code">
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label nzSpan="4">Workshop Location</nz-form-label>
-        <nz-form-control [nzSpan]="14">
+        <nz-form-control [nzSpan]="16">
           <input nz-input type="text" formControlName="workshop_location" placeholder="Workshop Location">
         </nz-form-control>
       </nz-form-item>
       <nz-form-item>
         <nz-form-label nzSpan="4">Workshop Address</nz-form-label>
-        <nz-form-control [nzSpan]="14">
+        <nz-form-control [nzSpan]="16">
           <input nz-input type="text" formControlName="workshop_address" placeholder="Workshop Address">
         </nz-form-control>
       </nz-form-item>

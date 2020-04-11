@@ -37,7 +37,7 @@ export class InsertVehicleComponent implements OnInit {
     }
 
     if (this.formGroup.valid) {
-      this.manageVehicleService.InsertNewVehicle(this.formGroup.value)
+      this.manageVehicleService.InsertVehicle(this.formGroup.value)
         .pipe(first())
         .subscribe(response => {
           if (response === 'Success') {

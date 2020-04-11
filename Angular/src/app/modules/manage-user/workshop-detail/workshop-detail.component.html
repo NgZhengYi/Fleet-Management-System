@@ -1,0 +1,50 @@
+<div class="title-container">
+  <span>Workshop Detail</span>
+</div>
+
+<div class="content-container">
+  <nz-spin class="spinner-cover" nzSize="large" [nzSpinning]="loading">
+    <div *ngIf="FormReady">
+      <form nz-form [nzLayout]="'horizontal'" [formGroup]="WorkshopFormGroup" (ngSubmit)="updateForm()">
+        <nz-form-item>
+          <nz-form-label [nzSpan]="4">Workshop Code</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <input nz-input type="text" formControlName="workshop_code">
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="4">Workshop Name</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <input nz-input type="text" formControlName="workshop_name">
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="4">Workshop Region</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <nz-select formControlName="workshop_region">
+              <nz-option nzValue="Northern" nzLabel="Northern"></nz-option>
+              <nz-option nzValue="Southern" nzLabel="Southern"></nz-option>
+              <nz-option nzValue="Eastern" nzLabel="Eastern"></nz-option>
+              <nz-option nzValue="Western" nzLabel="Western"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-label [nzSpan]="4">Workshop Address</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <input nz-input type="text" formControlName="workshop_address">
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
+          <nz-form-control nzOffset="4">
+            <button nz-button type="submit" nzType="primary" class="button-margin">Update</button>
+            <button nz-button type="button" nzType="default" class="button-margin" routerLink="/manage-user"
+                    [queryParams]="{TAB_INDEX : 2}">
+              Back
+            </button>
+          </nz-form-control>
+        </nz-form-item>
+      </form>
+    </div>
+  </nz-spin>
+</div>

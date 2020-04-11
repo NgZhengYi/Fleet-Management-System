@@ -4,6 +4,7 @@ import {ActivatedRoute} from '@angular/router';
 import {ToastrService} from 'ngx-toastr';
 
 import {ManageVehicleService} from '../manage-vehicle.service';
+import {first} from 'rxjs/operators';
 
 @Component({
   selector: 'app-update-vehicle',
@@ -57,9 +58,16 @@ export class UpdateVehicleComponent implements OnInit {
     }
 
     if (this.formGroup.valid) {
-      this.toast.success('Updated Vehicle Detail', 'Message');
-
-      // Perform Update to Service
+      this.manageVehicleService.UpdateVehicle(this.formGroup.value)
+        .pipe(first())
+        .subscribe(response => {
+          if (response === 'Success') {
+            this.toast.success('Updated Vehicle Successfully');
+            this.formGroup.reset();
+          } else {
+            this.toast.error(response);
+          }
+        });
     }
   }
 

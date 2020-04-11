@@ -1,0 +1,32 @@
+.content-container {
+  height: 90%
+}
+
+.action-container {
+  height: 10%;
+  text-align: center;
+}
+
+.button-margin {
+  margin: 1% 0.25% 0 0.25%;
+  height: 50%;
+  text-align: center;
+}
+
+.spinner-cover {
+  width: 100%;
+  height: 100%;
+}
+
+.container-padding {
+  padding: 0.25%;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.scroll-viewport {
+  height: 100%;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}

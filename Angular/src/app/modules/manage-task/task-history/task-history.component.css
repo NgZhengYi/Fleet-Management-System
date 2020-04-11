@@ -1,0 +1,25 @@
+.title-container {
+  height: 5%;
+  text-align: center;
+  font-size: x-large;
+}
+
+.content-container {
+  height: 89.5%;
+  margin-top: 0.25%;
+  margin-bottom: 0.25%;
+}
+
+.action-container {
+  height: 5%;
+  text-align: center;
+}
+
+.button-margin {
+  margin-left: 0.5%;
+  margin-right: 0.5%;
+}
+
+.scroll-viewport {
+  height: 100%;
+}

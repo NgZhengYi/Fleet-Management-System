@@ -24,4 +24,6 @@ app.use('/api/driver', driverRoute);
 app.use('/api/task', taskRoute);
 app.use('/api/maintenance', maintenanceRoute);
 
+// process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
+
 module.exports = app;

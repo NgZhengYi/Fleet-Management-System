@@ -1,17 +1,32 @@
+.title-container {
+  height: 7.5%;
+  text-align: center;
+  font-size: xx-large;
+}
+
+.content-container {
+  height: 85%;
+}
+
+.action-container {
+  height: 7.5%;
+  text-align: center;
+}
+
 .cover {
   width: 100%;
   height: 100%;
 }
 
-.height {
-  height: 50%;
+.button-margin {
+  margin-left: 0.5%;
+  margin-right: 0.5%;
 }
 
-.col-md-6 {
-  margin: 0.5%;
-  flex: unset;
+.ant-table-thead > tr > th {
+  background-color: greenyellow;
 }
 
-.box-shadow {
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+tr.ant-table-row {
+  background-color: aliceblue;
 }

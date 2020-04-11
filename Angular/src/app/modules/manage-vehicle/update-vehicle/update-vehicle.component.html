@@ -35,15 +35,15 @@
     <nz-form-control [nzSpan]="14">
       <nz-select formControlName="vehicle_status">
         <nz-option nzValue="Available" nzLabel="AVAILABLE"></nz-option>
-        <nz-option nzValue="Mission" nzLabel="MISSION"></nz-option>
+        <nz-option nzValue="Assigned" nzLabel="ASSIGNED"></nz-option>
         <nz-option nzValue="Maintenance" nzLabel="MAINTENANCE"></nz-option>
       </nz-select>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
     <nz-form-control nzOffset="4">
-      <button nz-button nzType="primary" class="button-margin">Update</button>
-      <button nz-button nzType="default" class="button-margin" routerLink="/manage-vehicle/view-vehicle">
+      <button nz-button nzType="primary" type="submit" class="button-margin">Update</button>
+      <button nz-button nzType="default" type="button" class="button-margin" routerLink="/manage-vehicle">
         Cancel
       </button>
     </nz-form-control>

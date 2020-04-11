@@ -1,1 +1,73 @@
-<p>home works!</p>
+<div class="home-container">
+  <div class="d-flex flex-row row-height">
+    <div class="d-flex flex-column col-md-4 box-shadow">
+      <nz-spin class="cover" nzSize="large" [nzSpinning]="Loading">
+        <div *ngIf="Ready">
+
+        </div>
+      </nz-spin>
+    </div>
+    <div class="d-flex flex-column col-md-4 box-shadow">
+      <nz-spin class="cover" nzSize="large" [nzSpinning]="Loading">
+        <div *ngIf="Ready">
+
+        </div>
+      </nz-spin>
+    </div>
+    <div class="d-flex flex-column col-md-4 box-shadow">
+      <nz-spin class="cover" nzSize="large" [nzSpinning]="Loading">
+        <div *ngIf="Ready">
+          <canvas baseChart [chartType]="vehicleStatusChartType" [data]="chartVehicleStatusData"
+                  [labels]="chartVehicleStatusLabel" [options]="chartVehicleStatusOptions"></canvas>
+        </div>
+      </nz-spin>
+    </div>
+  </div>
+  <div class="d-flex flex-row row-height">
+    <div class="d-flex flex-column col-md-4 box-shadow">
+      <nz-spin class="cover" nzSize="large" [nzSpinning]="Loading">
+        <div *ngIf="Ready">
+
+        </div>
+      </nz-spin>
+    </div>
+    <div class="d-flex flex-column col-md-4 box-shadow">
+      <nz-spin class="cover" nzSize="large" [nzSpinning]="Loading">
+        <div *ngIf="Ready">
+
+        </div>
+      </nz-spin>
+    </div>
+    <div class="d-flex flex-column col-md-4 box-shadow">
+      <nz-spin class="cover" nzSize="large" [nzSpinning]="Loading">
+        <div class="cover" *ngIf="Ready">
+          <canvas baseChart [chartType]="vehicleTypeChartType" [data]="chartVehicleTypeData"
+                  [labels]="chartVehicleTypeLabel" [options]="chartVehicleTypeOptions"></canvas>
+        </div>
+      </nz-spin>
+    </div>
+  </div>
+  <div class="d-flex flex-row row-height">
+    <div class="d-flex flex-column col-md-4 box-shadow">
+      <nz-spin class="cover" nzSize="large" [nzSpinning]="Loading">
+        <div *ngIf="Ready">
+
+        </div>
+      </nz-spin>
+    </div>
+    <div class="d-flex flex-column col-md-4 box-shadow">
+      <nz-spin class="cover" nzSize="large" [nzSpinning]="Loading">
+        <div *ngIf="Ready">
+
+        </div>
+      </nz-spin>
+    </div>
+    <div class="d-flex flex-column col-md-4 box-shadow">
+      <nz-spin class="cover" nzSize="large" [nzSpinning]="Loading">
+        <div *ngIf="Ready">
+
+        </div>
+      </nz-spin>
+    </div>
+  </div>
+</div>

@@ -8,7 +8,6 @@ import {ManageVehicleComponent} from './manage-vehicle.component';
 import {ManageVehicleService} from './manage-vehicle.service';
 import {ManageVehicleRoutingModule} from './manage-vehicle-routing.module';
 import {InsertVehicleComponent} from './insert-vehicle/insert-vehicle.component';
-import {ViewVehicleComponent} from './view-vehicle/view-vehicle.component';
 import {UpdateVehicleComponent} from './update-vehicle/update-vehicle.component';
 import {ToastrModule, ToastrService} from 'ngx-toastr';
 
@@ -16,7 +15,6 @@ import {ToastrModule, ToastrService} from 'ngx-toastr';
   declarations: [
     ManageVehicleComponent,
     InsertVehicleComponent,
-    ViewVehicleComponent,
     UpdateVehicleComponent
   ],
   imports: [

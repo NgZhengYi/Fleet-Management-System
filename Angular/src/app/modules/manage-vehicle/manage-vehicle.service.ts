@@ -8,21 +8,9 @@ import {map} from 'rxjs/operators';
   providedIn: 'root'
 })
 export class ManageVehicleService {
-  $DashboardSubject: Subject<any> = new Subject<any>();
   $VehicleSubject: Subject<any> = new Subject<any>();
-  $InsertVehicleSubject: Subject<any> = new Subject<any>();
 
   constructor(private http: HttpClient) {
-  }
-
-  LoadVehicleDashboard() {
-    this.http.post<{ message: string; result: any }>(
-      environment.nodeUrl + '/vehicle/LoadDashboardData', {}
-    ).subscribe(async response => {
-      if (response.message === 'Success') {
-        this.$DashboardSubject.next(response.result);
-      }
-    });
   }
 
   LoadVehicleData() {
@@ -35,9 +23,9 @@ export class ManageVehicleService {
     });
   }
 
-  InsertNewVehicle(vehicle) {
+  InsertVehicle(vehicle) {
     return this.http.post<{ message: string; error: string }>(
-      environment.nodeUrl + '/vehicle/InsertNewVehicle', {vehicle}
+      environment.nodeUrl + '/vehicle/InsertVehicle', {vehicle}
     ).pipe(map(response => {
       if (response.message === 'Success') {
         return response.message;
@@ -46,4 +34,17 @@ export class ManageVehicleService {
       }
     }));
   }
+
+  UpdateVehicle(vehicle) {
+    return this.http.post<{ message: string; error: string }>(
+      environment.nodeUrl + '/vehicle/UpdateVehicle', {vehicle}
+    ).pipe(map(response => {
+      if (response.message === 'Success') {
+        return response.message;
+      } else {
+        return response.error;
+      }
+    }));
+  }
+
 }

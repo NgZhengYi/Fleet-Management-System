@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-
-import {ManageUserService} from '../manage-user.service';
 import {first} from 'rxjs/operators';
 import {ToastrService} from 'ngx-toastr';
+
+import {ManageUserService} from '../manage-user.service';
 
 @Component({
   selector: 'app-create-account',
@@ -25,6 +25,8 @@ export class CreateAccountComponent implements OnInit {
       username: [null, [Validators.required]],
       password: [null, [Validators.required]],
       role: [null, [Validators.required]],
+      email: [null],
+      phone: [null]
     });
   }
 
@@ -36,7 +38,7 @@ export class CreateAccountComponent implements OnInit {
         driver_code: [null, Validators.required],
         driver_name: [null, Validators.required],
         driver_license: [null, Validators.required],
-        driver_skill_level: [null, Validators.required]
+        driver_skill_level: [null, Validators.required],
       });
     } else if (event === 'WORKSHOP') {
       this.roleSelected = 'WORKSHOP';
@@ -54,8 +56,6 @@ export class CreateAccountComponent implements OnInit {
   submitForm() {
     const account = this.AccountFormGroup.value;
     console.log(account);
-    const detail = this.DetailFormGroup.value;
-    console.log(detail);
 
     for (const i in this.AccountFormGroup.controls) {
       if (this.AccountFormGroup.controls[i].status === 'INVALID') {
@@ -64,29 +64,57 @@ export class CreateAccountComponent implements OnInit {
       }
     }
 
-    for (const i in this.DetailFormGroup.controls) {
-      if (this.DetailFormGroup.controls[i].status === 'INVALID') {
-        this.DetailFormGroup.controls[i].markAsDirty();
-        this.DetailFormGroup.controls[i].updateValueAndValidity();
-      }
-    }
-
     console.log('AccountFormGroup : ' + this.AccountFormGroup.valid);
-    console.log('DetailFormGroup : ' + this.DetailFormGroup.valid);
+
+    let detail = null;
+
+    if (this.roleSelected === 'DRIVER' || this.roleSelected === 'WORKSHOP') {
+      detail = this.DetailFormGroup.value;
+      console.log(detail);
+
+      for (const i in this.DetailFormGroup.controls) {
+        if (this.DetailFormGroup.controls[i].status === 'INVALID') {
+          this.DetailFormGroup.controls[i].markAsDirty();
+          this.DetailFormGroup.controls[i].updateValueAndValidity();
+        }
+      }
+
+      console.log('DetailFormGroup : ' + this.DetailFormGroup.valid);
+    }
 
     if (this.AccountFormGroup.valid && this.DetailFormGroup.valid) {
       if (this.roleSelected === 'DRIVER') {
         this.account = {
-          username: account.username, password: account.password, role: account.role, driver_code: detail.driver_code,
-          driver_name: detail.driver_name, driver_license: detail.driver_license, driver_skill_level: detail.driver_skill_level
+          username: account.username,
+          password: account.password,
+          role: account.role,
+          email: account.email,
+          phone: account.phone,
+          driver_code: detail.driver_code,
+          driver_name: detail.driver_name,
+          driver_license: detail.driver_license,
+          driver_skill_level: detail.driver_skill_level
         };
       } else if (this.roleSelected === 'WORKSHOP') {
         this.account = {
-          username: account.username, password: account.password, role: account.role, workshop_code: detail.workshop_code,
-          workshop_location: detail.workshop_location, workshop_address: detail.workshop_address
+          username: account.username,
+          password: account.password,
+          role: account.role,
+          email: account.email,
+          phone: account.phone,
+          workshop_code: detail.workshop_code,
+          workshop_name: detail.workshop_name,
+          workshop_region: detail.workshop_region,
+          workshop_address: detail.workshop_address
         };
       } else {
-        this.account = {username: account.username, password: account.password, role: account.role};
+        this.account = {
+          username: account.username,
+          password: account.password,
+          role: account.role,
+          email: account.email,
+          phone: account.phone
+        };
       }
 
       this.manageUserService.RegisterNewUser(this.account)
@@ -95,7 +123,7 @@ export class CreateAccountComponent implements OnInit {
           if (response === 'Success') {
             this.toast.success('Register Successfully');
           } else {
-            this.toast.error(response);
+            this.toast.error('Error');
           }
         });
     }
