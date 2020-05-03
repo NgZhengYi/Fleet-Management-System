@@ -11,7 +11,12 @@ import {ManageTaskService} from '../manage-task.service';
   styleUrls: ['./new-task.component.css']
 })
 export class NewTaskComponent implements OnInit {
+  private storage = JSON.parse(localStorage.getItem('Fleet Management System'));
+  layout = 'vertical';
   TaskFormGroup: FormGroup;
+  ModalVisible = false;
+  LoadingDriver = true;
+  ListDriver = [];
 
   constructor(private manageTaskService: ManageTaskService, private formBuilder: FormBuilder, private toast: ToastrService) {
   }
@@ -19,13 +24,16 @@ export class NewTaskComponent implements OnInit {
   ngOnInit(): void {
     this.TaskFormGroup = this.formBuilder.group({
       task_title: ['', Validators.required],
-      task_detail: [''],
-      task_date: ['', Validators.required],
-      task_time: ['', Validators.required],
-      task_origin_location: ['', Validators.required],
-      task_destination_location: ['', Validators.required],
       task_driver: [''],
-      task_vehicle: ['']
+      driver_identity: [''],
+      task_date_start: ['', Validators.required],
+      task_date_end: ['', Validators.required],
+      task_time_start: [null],
+      task_time_end: [null],
+      task_depart: ['', Validators.required],
+      task_destination: ['', Validators.required],
+      task_detail: [''],
+      task_created_by: [this.storage.identity, Validators.required]
     });
   }
 
@@ -45,11 +53,43 @@ export class NewTaskComponent implements OnInit {
         .subscribe(response => {
           if (response === 'Success') {
             this.toast.success('Added Successfully');
+            // this.resetForm();
           } else {
-            this.toast.error('Error');
+            this.toast.error(response);
           }
         });
     }
+  }
+
+  resetForm() {
+    this.TaskFormGroup.reset();
+    this.TaskFormGroup.patchValue({
+      task_created_by: this.storage.identity
+    });
+  }
+
+  searchDriver() {
+    this.ModalVisible = true;
+    console.log(this.TaskFormGroup.get('task_date_start').value + ' - ' + this.TaskFormGroup.get('task_date_end').value);
+    this.manageTaskService.SelectDriver(this.TaskFormGroup.get('task_date_start').value, this.TaskFormGroup.get('task_date_end').value);
+
+    this.manageTaskService.$SelectDriver.subscribe(value => {
+      this.ListDriver = value;
+      this.LoadingDriver = false;
+    });
+  }
+
+  onDriverSelected(ID, NAME) {
+    this.ModalVisible = false;
+
+    this.TaskFormGroup.patchValue({
+      task_driver: NAME,
+      driver_identity: ID
+    });
+  }
+
+  onModalCancel() {
+    this.ModalVisible = false;
   }
 
 }

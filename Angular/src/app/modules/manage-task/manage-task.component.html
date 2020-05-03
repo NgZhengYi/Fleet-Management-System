@@ -1,53 +1,45 @@
 <div class="d-flex flex-row content-container">
   <div class="col-md-4 container-padding">
-    <!--    <nz-spin class="spinner-cover" nzSize="large" [nzSpinning]="loading">-->
-    <!--      <div *ngIf="listReady">-->
     <cdk-virtual-scroll-viewport class="scroll-viewport" itemSize="50">
       <nz-list nzHeader="Today Task" nzSize="small" nzBordered>
-        <nz-list-item *cdkVirtualFor="let item of todayTaskData" [nzActions]="[TodayTaskAction]">
-          <nz-list-item-meta nzTitle="{{item.task_title}}" nzDescription="{{item.task_detail}}"></nz-list-item-meta>
+        <nz-list-item *cdkVirtualFor="let item of todayTaskData" [nzActions]="[TodayTaskAction]" nzContent="{{item.task_status}}">
+          <nz-list-item-meta nzTitle="{{item.task_title}} "
+                             nzDescription="Date : {{item.task_date_start}} -- {{item.task_date_end}}">
+          </nz-list-item-meta>
           <ng-template #TodayTaskAction>
             <a routerLink="/manage-task/update-task" [queryParams]="{AUTO_IDENTITY: item.auto_id}">View</a>
           </ng-template>
         </nz-list-item>
       </nz-list>
     </cdk-virtual-scroll-viewport>
-    <!--      </div>-->
-    <!--    </nz-spin>-->
   </div>
   <div class="col-md-4 container-padding">
-    <!--    <nz-spin class="spinner-cover" nzSize="large" [nzSpinning]="loading">-->
-    <!--      <div *ngIf="listReady">-->
     <cdk-virtual-scroll-viewport class="scroll-viewport" itemSize="50">
       <nz-list nzHeader="Upcoming Task" nzSize="small" nzBordered>
         <nz-list-item *cdkVirtualFor="let item of upcomingTaskData" [nzActions]="[UpcomingTaskActon]">
           <nz-list-item-meta nzTitle="{{item.task_title}}"
-                             nzDescription="Date: {{item.task_date | slice : 0 : 10}}"></nz-list-item-meta>
+                             nzDescription="Date : {{item.task_date_start}} -- {{item.task_date_end}}">
+          </nz-list-item-meta>
           <ng-template #UpcomingTaskActon>
             <a routerLink="/manage-task/update-task" [queryParams]="{AUTO_IDENTITY: item.auto_id}">View</a>
           </ng-template>
         </nz-list-item>
       </nz-list>
     </cdk-virtual-scroll-viewport>
-    <!--      </div>-->
-    <!--    </nz-spin>-->
   </div>
   <div class="col-md-4 container-padding">
-    <!--    <nz-spin class="spinner-cover" nzSize="large" [nzSpinning]="loading">-->
-    <!--      <div *ngIf="listReady">-->
     <cdk-virtual-scroll-viewport class="scroll-viewport" itemSize="50">
       <nz-list nzHeader="Unassigned Task" nzSize="small" nzBordered>
         <nz-list-item *cdkVirtualFor="let item of unassignedTaskData" [nzActions]="[UnassignedTaskAction]">
           <nz-list-item-meta nzTitle="{{item.task_title}}"
-                             nzDescription="Date: {{item.task_date | slice : 0 : 10}}"></nz-list-item-meta>
+                             nzDescription="Date : {{item.task_date_start}} -- {{item.task_date_end}}">
+          </nz-list-item-meta>
           <ng-template #UnassignedTaskAction>
             <a routerLink="/manage-task/update-task" [queryParams]="{AUTO_IDENTITY: item.auto_id}">View</a>
           </ng-template>
         </nz-list-item>
       </nz-list>
     </cdk-virtual-scroll-viewport>
-    <!--      </div>-->
-    <!--    </nz-spin>-->
   </div>
 </div>
 <div class="action-container">

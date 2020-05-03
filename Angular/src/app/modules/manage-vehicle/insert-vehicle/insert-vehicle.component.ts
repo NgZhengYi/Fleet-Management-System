@@ -11,6 +11,7 @@ import {ManageVehicleService} from '../manage-vehicle.service';
   styleUrls: ['./insert-vehicle.component.css']
 })
 export class InsertVehicleComponent implements OnInit {
+  layout = 'vertical';
   formGroup: FormGroup;
 
   constructor(private manageVehicleService: ManageVehicleService, private formBuilder: FormBuilder,
@@ -20,9 +21,14 @@ export class InsertVehicleComponent implements OnInit {
   ngOnInit(): void {
     this.formGroup = this.formBuilder.group({
       vehicle_code: [null, [Validators.required]],
-      vehicle_name: [null, [Validators.required]],
+      vehicle_type: [null, [Validators.required]],
+      vehicle_manufacturer: [null, [Validators.required]],
+      vehicle_model: [null, [Validators.required]],
+      vehicle_year: [null, [
+        Validators.required, Validators.pattern('^[0-9]*$'), Validators.minLength(4), Validators.maxLength(4)
+      ]],
+      vehicle_max_load: [null, [Validators.required, Validators.pattern('^[0-9]*$')]],
       vehicle_plate: [null, [Validators.required]],
-      vehicle_type: [null, [Validators.required]]
     });
   }
 

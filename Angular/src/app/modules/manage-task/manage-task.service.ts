@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import {Subject} from 'rxjs';
+import {map} from 'rxjs/operators';
 
 import {environment} from '../../../environments/environment';
-import {map} from 'rxjs/operators';
-import {Subject} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,14 +28,14 @@ export class ManageTaskService {
     });
   }
 
-  NewTask(newTask) {
-    return this.http.post<{ message: string }>(
-      environment.nodeUrl + '/task/NewTask', {newTask}
+  NewTask(task) {
+    return this.http.post<{ message: string; error: string }>(
+      environment.nodeUrl + '/task/NewTask', {task}
     ).pipe(map(response => {
       if (response.message === 'Success') {
         return response.message;
       } else {
-        return response.message;
+        return response.error;
       }
     }));
   }
@@ -72,9 +72,9 @@ export class ManageTaskService {
     });
   }
 
-  SelectDriver() {
-    this.http.get<{message: string; result: any}>(
-      environment.nodeUrl + '/task/SelectDriver'
+  SelectDriver(DS: string, DE: string) {
+    this.http.post<{message: string; result: any}>(
+      environment.nodeUrl + '/task/SelectDriver', {date_start: DS, date_end: DE}
     ).subscribe(async response => {
       if (response.message === 'Success') {
         this.$SelectDriver.next(response.result);

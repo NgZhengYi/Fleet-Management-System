@@ -1,1 +1,43 @@
-<p>manage-maintenance works!</p>
+<div class="d-flex flex-row content-container">
+  <div class="col-md-6 container-padding">
+    <div class="list-header">Scheduled Maintenance</div>
+    <cdk-virtual-scroll-viewport class="scroll-viewport" itemSize="50">
+      <nz-list nzSize="small" nzBordered>
+        <nz-list-item *cdkVirtualFor="let item of scheduledMaintenance" [nzActions]="[ScheduledAction]" [nzExtra]="ScheduledDate">
+          <nz-list-item-meta nzTitle="{{item.workshop}}" nzDescription="{{item.vehicle}}"></nz-list-item-meta>
+          <ng-template #ScheduledDate>
+            {{item.scheduled_date | slice : 0 : 10}}
+          </ng-template>
+          <ng-template #ScheduledAction>
+            <a routerLink="/manage-maintenance/maintenance-detail" [queryParams]="{AUTO_IDENTITY: item.auto_id}">VIEW</a>
+          </ng-template>
+        </nz-list-item>
+      </nz-list>
+    </cdk-virtual-scroll-viewport>
+  </div>
+  <div class="col-md-6 container-padding">
+    <div class="list-header">Completed Maintenance</div>
+    <cdk-virtual-scroll-viewport class="scroll-viewport" itemSize="50">
+      <nz-list nzSize="small" nzBordered>
+        <nz-list-item *cdkVirtualFor="let item of completedMaintenance" [nzActions]="[CompletedAction]" [nzExtra]="CompletedDate">
+          <nz-list-item-meta nzTitle="{{item.workshop}}" nzDescription="{{item.vehicle}}"></nz-list-item-meta>
+          <ng-template #CompletedDate>
+            {{item.completed_date | slice : 0 : 10}}
+          </ng-template>
+          <ng-template #CompletedAction>
+            <a routerLink="/manage-maintenance/maintenance-detail" [queryParams]="{AUTO_IDENTITY: item.auto_id}">VIEW</a>
+          </ng-template>
+        </nz-list-item>
+      </nz-list>
+    </cdk-virtual-scroll-viewport>
+  </div>
+</div>
+
+<div class="action-container">
+  <button class="button-margin" nz-button nzType="primary" routerLink="/manage-maintenance/new-maintenance">
+    New Maintenance Schedule
+  </button>
+  <button class="button-margin" nz-button nzType="primary" routerLink="/manage-maintenance/maintenance-history">
+    Vehicle Maintenance History
+  </button>
+</div>

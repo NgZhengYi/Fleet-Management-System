@@ -16,15 +16,16 @@ export class AuthService {
   }
 
   login(username, password) {
-    return this.http.post<{ message: string; result: any }>(
+    return this.http.post<{ message: string; error: string; result: any }>(
       environment.nodeUrl + '/account/ValidateLogin', {username, password}
     ).pipe(map(value => {
         if (value.message === 'Success') {
           localStorage.setItem('Fleet Management System', JSON.stringify(value.result));
           this.$authStatus.next(true);
+          return value.message;
+        } else {
+          return value.error;
         }
-        console.log('Error');
-        return value.message;
       })
     );
   }

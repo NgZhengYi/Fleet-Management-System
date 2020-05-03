@@ -57,7 +57,7 @@ export class WorkshopDetailComponent implements OnInit {
     }
 
     if (this.WorkshopFormGroup.valid) {
-      this.manageUserService.UpdateSingleDriver(this.WorkshopFormGroup.value)
+      this.manageUserService.UpdateWorkshop(this.WorkshopFormGroup.value)
         .pipe(first())
         .subscribe(response => {
           if (response === 'Success') {

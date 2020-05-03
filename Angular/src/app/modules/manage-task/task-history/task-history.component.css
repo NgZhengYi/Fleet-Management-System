@@ -1,17 +1,17 @@
 .title-container {
-  height: 5%;
+  height: 7.5%;
   text-align: center;
-  font-size: x-large;
+  font-size: xx-large;
+  border: 1px solid #d9d9d9;
 }
 
 .content-container {
-  height: 89.5%;
-  margin-top: 0.25%;
-  margin-bottom: 0.25%;
+  height: 81.5%;
+  margin: 0.5% 0 0.5% 0;
 }
 
 .action-container {
-  height: 5%;
+  height: 10%;
   text-align: center;
 }
 

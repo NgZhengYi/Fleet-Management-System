@@ -27,7 +27,7 @@
         <nz-form-item>
           <nz-form-label [nzSpan]="4" nzRequired>Driver Skill</nz-form-label>
           <nz-form-control [nzSpan]="16">
-            <input nz-input type="text" formControlName="driver_skill_level">
+            <input nz-input type="text" formControlName="driver_type">
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
@@ -42,13 +42,15 @@
         <nz-form-item>
           <nz-form-label [nzSpan]="4">Driver Vehicle</nz-form-label>
           <nz-form-control [nzSpan]="16">
-            <input nz-input type="text" formControlName="driver_vehicle" [nzAutocomplete]="autocomplete"
-                   (input)="onAutoCompleteInput($event.target?.value)">
-            <nz-autocomplete nzBackfill #autocomplete>
-              <nz-auto-option *ngFor="let option of options | slice : 0 : 4" [nzValue]="option.auto_id">
-                {{option.vehicle_code}}
-              </nz-auto-option>
-            </nz-autocomplete>
+            <nz-input-group nzSearch [nzAddOnAfter]="buttonIcon">
+              <input nz-input formControlName="vehicle_code" placeholder="Assign Driver">
+              <input type="hidden" formControlName="vehicle_identity">
+            </nz-input-group>
+            <ng-template #buttonIcon>
+              <button nz-button nzSearch type="button" nzType="primary" (click)="selectVehicle()">
+                <i nz-icon nzType="search"></i>
+              </button>
+            </ng-template>
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
@@ -64,3 +66,31 @@
     </div>
   </nz-spin>
 </div>
+
+<nz-modal [(nzVisible)]="ModalVisible" nzWidth="80%" nzTitle="Select Vehicle" [nzContent]="modalContent"
+          [nzFooter]="modalFooter"
+          (nzOnCancel)="onModalCancel()" [nzStyle]="{height: '80vh'}"></nz-modal>
+<ng-template #modalContent>
+  <nz-table #DriverTable nzBordered [nzData]="ListVehicle" [nzPageSize]="10" [nzLoading]="LoadingVehicle"
+            nzSize="small">
+    <thead>
+    <tr>
+      <th nzWidth="20%">Vehicle Code</th>
+      <th nzWidth="20%">Vehicle Plate</th>
+      <th nzWidth="20%">Vehicle Type</th>
+      <th nzWidth="20%">ACTION</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of DriverTable.data">
+      <td>{{item.vehicle_code}}</td>
+      <td>{{item.vehicle_plate}}</td>
+      <td>{{item.vehicle_type}}</td>
+      <td class="text-center">
+        <a (click)="onVehicleSelected(item.auto_id, item.vehicle_code)">SELECT</a>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</ng-template>
+<ng-template #modalFooter></ng-template>

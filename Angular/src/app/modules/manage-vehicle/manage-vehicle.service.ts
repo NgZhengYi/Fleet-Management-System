@@ -9,6 +9,7 @@ import {map} from 'rxjs/operators';
 })
 export class ManageVehicleService {
   $VehicleSubject: Subject<any> = new Subject<any>();
+  $SingleVehicleSubject: Subject<any> = new Subject<any>();
 
   constructor(private http: HttpClient) {
   }
@@ -33,6 +34,16 @@ export class ManageVehicleService {
         return response.error;
       }
     }));
+  }
+
+  SingleVehicle(identity) {
+    this.http.post<{ message: string; result: any }>(
+      environment.nodeUrl + '/vehicle/SingleVehicle', {identity}
+    ).subscribe(async response => {
+      if (response.message === 'Success') {
+        this.$SingleVehicleSubject.next(response.result);
+      }
+    });
   }
 
   UpdateVehicle(vehicle) {

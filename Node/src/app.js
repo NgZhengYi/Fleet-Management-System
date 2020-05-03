@@ -1,6 +1,7 @@
 const express = require("express");
 const bodyParser = require("body-parser");
 
+const commonRoute = require("./routes/common");
 const accountRoute = require("./routes/account");
 const vehicleRoute = require("./routes/vehicle");
 const driverRoute = require("./routes/driver");
@@ -18,6 +19,7 @@ app.use((req, res, next) => {
     next();
 });
 
+app.use('/api/common', commonRoute);
 app.use('/api/account', accountRoute);
 app.use('/api/vehicle', vehicleRoute);
 app.use('/api/driver', driverRoute);

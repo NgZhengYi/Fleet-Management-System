@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+
+import {ManageMaintenanceService} from './manage-maintenance.service';
 
 @Component({
   selector: 'app-manage-maintenance',
@@ -6,10 +8,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manage-maintenance.component.css']
 })
 export class ManageMaintenanceComponent implements OnInit {
+  scheduledMaintenance: [];
+  completedMaintenance: [];
 
-  constructor() { }
+  constructor(private manageMaintenanceService: ManageMaintenanceService) {
+  }
 
   ngOnInit(): void {
+    this.onLoad();
+  }
+
+  onLoad() {
+    this.manageMaintenanceService.MaintenanceList();
+
+    this.manageMaintenanceService.$MaintenanceList.subscribe(value => {
+      console.log(value);
+      this.scheduledMaintenance = value.scheduledMaintenance;
+      this.completedMaintenance = value.completedMaintenance;
+    });
   }
 
 }

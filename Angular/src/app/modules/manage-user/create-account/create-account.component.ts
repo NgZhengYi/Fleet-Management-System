@@ -38,7 +38,7 @@ export class CreateAccountComponent implements OnInit {
         driver_code: [null, Validators.required],
         driver_name: [null, Validators.required],
         driver_license: [null, Validators.required],
-        driver_skill_level: [null, Validators.required],
+        driver_type: [null, Validators.required],
       });
     } else if (event === 'WORKSHOP') {
       this.roleSelected = 'WORKSHOP';
@@ -93,7 +93,7 @@ export class CreateAccountComponent implements OnInit {
           driver_code: detail.driver_code,
           driver_name: detail.driver_name,
           driver_license: detail.driver_license,
-          driver_skill_level: detail.driver_skill_level
+          driver_type: detail.driver_type
         };
       } else if (this.roleSelected === 'WORKSHOP') {
         this.account = {

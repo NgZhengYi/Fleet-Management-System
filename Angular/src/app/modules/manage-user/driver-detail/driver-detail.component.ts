@@ -18,9 +18,9 @@ export class DriverDetailComponent implements OnInit {
   FormReady = false;
   private DriverIdentity;
   private DriverDetail: Subscription;
-  private SelectVehicle: Subscription;
-  private VehicleList = [];
-  options = [];
+  ListVehicle = [];
+  ModalVisible = false;
+  LoadingVehicle = true;
 
   constructor(private manageUserService: ManageUserService, private formBuilder: FormBuilder, private route: ActivatedRoute,
               private toast: ToastrService) {
@@ -31,7 +31,7 @@ export class DriverDetailComponent implements OnInit {
       this.DriverIdentity = value.AUTO_IDENTITY;
     });
 
-    this.manageUserService.FetchSingleDriver(this.DriverIdentity);
+    this.manageUserService.SingleDriver(this.DriverIdentity);
 
     this.DriverDetail = this.manageUserService.$SingleDriver.subscribe(value => {
       console.log(value);
@@ -40,9 +40,10 @@ export class DriverDetailComponent implements OnInit {
         driver_code: [value.driver_code, Validators.required],
         driver_name: [value.driver_name, Validators.required],
         driver_license: [value.driver_license, Validators.required],
-        driver_skill_level: [value.driver_skill_level, Validators.required],
+        driver_type: [value.driver_type, Validators.required],
         driver_status: [value.driver_status],
-        driver_vehicle: [null ? '' : value.vehicle_code]
+        vehicle_code: [value.vehicle_code],
+        vehicle_identity: [value.vehicle_identity]
       });
 
       this.loading = false;
@@ -50,16 +51,29 @@ export class DriverDetailComponent implements OnInit {
       this.DriverDetail.unsubscribe();
     });
 
+  }
+
+  selectVehicle() {
+    this.ModalVisible = true;
     this.manageUserService.SelectVehicle();
 
-    this.SelectVehicle = this.manageUserService.$SelectVehicle.subscribe(value => {
-      this.VehicleList = value;
-      this.SelectVehicle.unsubscribe();
+    this.manageUserService.$SelectVehicle.subscribe(value => {
+      this.ListVehicle = value;
+      this.LoadingVehicle = false;
     });
   }
 
-  onAutoCompleteInput(v: string) {
-    this.options = this.VehicleList.filter(value => value.vehicle_code.toUpperCase().indexOf(v.toUpperCase()) === 0);
+  onVehicleSelected(ID, CODE) {
+    this.ModalVisible = false;
+
+    this.DriverDetailFormGroup.patchValue({
+      vehicle_code: CODE,
+      vehicle_identity: ID
+    });
+  }
+
+  onModalCancel() {
+    this.ModalVisible = false;
   }
 
   updateForm() {
@@ -73,7 +87,7 @@ export class DriverDetailComponent implements OnInit {
     }
 
     if (this.DriverDetailFormGroup.valid) {
-      this.manageUserService.UpdateSingleWorkshop(this.DriverDetailFormGroup.value)
+      this.manageUserService.UpdateDriver(this.DriverDetailFormGroup.value)
         .pipe(first())
         .subscribe(response => {
           if (response === 'Success') {

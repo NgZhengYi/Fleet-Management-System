@@ -2,54 +2,133 @@
   <span>New Task</span>
 </div>
 
-<form nz-form nzLayout="horizontal" [formGroup]="TaskFormGroup" (ngSubmit)="submitForm()">
+<form nz-form [nzLayout]="layout" [formGroup]="TaskFormGroup" (ngSubmit)="submitForm()">
+  <div class="row">
+    <div class="col-6 column-padding">
+      <nz-form-item>
+        <nz-form-label nzRequired>Task Title</nz-form-label>
+        <nz-form-control nzErrorTip="Please Insert Task Title" nzHasFeedback>
+          <input nz-input type="text" formControlName="task_title" placeholder="Task Title">
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div class="col-6 column-padding">
+      <nz-form-item>
+        <nz-form-label>Task Driver</nz-form-label>
+        <nz-form-control>
+          <nz-input-group nzSearch [nzAddOnAfter]="buttonIcon">
+            <input nz-input formControlName="task_driver" placeholder="Assign Driver">
+            <input type="hidden" formControlName="driver_identity">
+          </nz-input-group>
+          <ng-template #buttonIcon>
+            <button nz-button nzSearch type="button" nzType="primary" (click)="searchDriver()"
+                    [disabled]="TaskFormGroup.get('task_date_start').invalid || TaskFormGroup.get('task_date_end').invalid">
+              <i nz-icon nzType="search"></i>
+            </button>
+          </ng-template>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6 column-padding">
+      <nz-form-item>
+        <nz-form-label nzRequired>Date Start</nz-form-label>
+        <nz-form-control>
+          <!--                    <nz-date-picker formControlName="task_date_start"></nz-date-picker>-->
+          <input nz-input type="date" formControlName="task_date_start">
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div class="col-6 column-padding">
+      <nz-form-item>
+        <nz-form-label nzRequired>Date End</nz-form-label>
+        <nz-form-control>
+          <!--          <nz-date-picker formControlName="task_date_end"></nz-date-picker>-->
+          <input nz-input type="date" formControlName="task_date_end">
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6 column-padding">
+      <nz-form-item>
+        <nz-form-label>Time Start</nz-form-label>
+        <nz-form-control>
+          <!--          <nz-time-picker formControlName="task_time_start"></nz-time-picker>-->
+          <input nz-input type="time" formControlName="task_time_start">
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div class="col-6 column-padding">
+      <nz-form-item>
+        <nz-form-label>Time End</nz-form-label>
+        <nz-form-control>
+          <!--          <nz-time-picker formControlName="task_time_end"></nz-time-picker>-->
+          <input nz-input type="time" formControlName="task_time_end">
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6 column-padding">
+      <nz-form-item>
+        <nz-form-label nzRequired>Depart Location</nz-form-label>
+        <nz-form-control>
+          <input nz-input type="text" formControlName="task_depart" placeholder="Depart Location">
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+    <div class="col-6 column-padding">
+      <nz-form-item>
+        <nz-form-label nzRequired>Destination Location</nz-form-label>
+        <nz-form-control>
+          <input nz-input type="text" formControlName="task_destination" placeholder="Destination Location">
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 column-padding">
+      <nz-form-item>
+        <nz-form-label>Task Detail</nz-form-label>
+        <nz-form-control>
+          <textarea nz-input formControlName="task_detail" rows="3" placeholder="Task Detail"></textarea>
+        </nz-form-control>
+      </nz-form-item>
+    </div>
+  </div>
   <nz-form-item>
-    <nz-form-label [nzSpan]="4" nzRequired>Task Title</nz-form-label>
-    <nz-form-control [nzSpan]="16">
-      <input nz-input type="text" formControlName="task_title" placeholder="Task Title">
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="4">Task Detail</nz-form-label>
-    <nz-form-control [nzSpan]="16">
-      <textarea nz-input formControlName="task_detail" size="4" placeholder="Task Detail"></textarea>
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="4" nzRequired>Task Date</nz-form-label>
-    <nz-form-control [nzSpan]="16">
-      <input nz-input type="date" formControlName="task_date" placeholder="Task Date Start">
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="4" nzRequired>Task Time</nz-form-label>
-    <nz-form-control [nzSpan]="16">
-      <input nz-input type="time" formControlName="task_time" placeholder="Task Time">
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="4" nzRequired>Origin Location</nz-form-label>
-    <nz-form-control [nzSpan]="16">
-      <input nz-input type="text" formControlName="task_origin_location" placeholder="Task Origin Location">
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="4" nzRequired>Destination Location</nz-form-label>
-    <nz-form-control [nzSpan]="16">
-      <input nz-input type="text" formControlName="task_destination_location" placeholder="Task Destination Location">
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-label [nzSpan]="4">Task Driver</nz-form-label>
-    <nz-form-control [nzSpan]="16">
-      <input nz-input type="text" formControlName="task_driver" placeholder="Assign Driver">
-    </nz-form-control>
-  </nz-form-item>
-  <nz-form-item>
-    <nz-form-control nzOffset="4">
+    <nz-form-control class="text-center">
       <button nz-button nzType="primary" class="button-margin" type="submit">Submit</button>
-      <button nz-button nzType="default" class="button-margin" type="reset">Clear</button>
+      <button nz-button nzType="default" class="button-margin" type="button" (click)="resetForm()">Clear</button>
       <button nz-button nzType="default" class="button-margin" routerLink="/manage-task">Back</button>
     </nz-form-control>
   </nz-form-item>
 </form>
+
+<nz-modal [(nzVisible)]="ModalVisible" nzWidth="80%" nzTitle="Select Driver" [nzContent]="modalContent" [nzFooter]="modalFooter"
+          (nzOnCancel)="onModalCancel()" [nzStyle]="{height: '80vh'}"></nz-modal>
+<ng-template #modalContent>
+  <nz-table #DriverTable nzBordered [nzData]="ListDriver" [nzPageSize]="10" [nzLoading]="LoadingDriver" nzSize="small">
+    <thead>
+    <tr>
+      <th nzWidth="30%">DRIVER CODE</th>
+      <th nzWidth="30%">DRIVER NAME</th>
+      <th nzWidth="20%">DRIVER SKILL</th>
+      <th nzWidth="20%">ACTION</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of DriverTable.data">
+      <td>{{item.driver_code}}</td>
+      <td>{{item.driver_name}}</td>
+      <td>{{item.driver_type}}</td>
+      <td>
+        <a (click)="onDriverSelected(item.auto_id, item.driver_name)">SELECT</a>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</ng-template>
+<ng-template #modalFooter></ng-template>

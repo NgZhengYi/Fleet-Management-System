@@ -1,0 +1,30 @@
+.search-container {
+  height: 7.5%;
+  padding-left: 10%;
+  padding-right: 10%;
+}
+
+.content-container {
+  height: 85%;
+  padding: 0.25%;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.action-container {
+  height: 7.5%;
+  text-align: center;
+}
+
+.button {
+  margin: 1% 0.25% 0 0.25%;
+  height: 75%;
+}
+
+.container-padding {
+  padding: 0.25%;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.scroll-viewport {
+  height: 100%;
+}

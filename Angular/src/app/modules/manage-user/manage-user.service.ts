@@ -33,7 +33,7 @@ export class ManageUserService {
 
   LoadDriverList() {
     this.http.get<{ message: string; result: any }>(
-      environment.nodeUrl + '/account/LoadDriver'
+      environment.nodeUrl + '/driver/LoadDriver'
     ).subscribe(async response => {
       if (response.message === 'Success') {
         this.$DriverSubject.next(response.result);
@@ -51,9 +51,9 @@ export class ManageUserService {
     });
   }
 
-  FetchSingleDriver(ID) {
+  SingleDriver(ID) {
     this.http.post<{ message: string; result: any }>(
-      environment.nodeUrl + '/account/FetchSingleDriver', {ID}
+      environment.nodeUrl + '/driver/SingleDriver', {ID}
     ).subscribe(async response => {
       if (response.message === 'Success') {
         this.$SingleDriver.next(response.result);
@@ -71,9 +71,9 @@ export class ManageUserService {
     });
   }
 
-  UpdateSingleDriver(DETAIL) {
+  UpdateDriver(DETAIL) {
     return this.http.post<{ message: string; error: string }>(
-      environment.nodeUrl + '/account/UpdateSingleDriver', {DETAIL}
+      environment.nodeUrl + '/driver/UpdateDriver', {DETAIL}
     ).pipe(map(response => {
       if (response.message === 'Success') {
         return response.message;
@@ -84,9 +84,9 @@ export class ManageUserService {
     }));
   }
 
-  UpdateSingleWorkshop(DETAIL) {
+  UpdateWorkshop(DETAIL) {
     return this.http.post<{ message: string; error: string }>(
-      environment.nodeUrl + '/account/UpdateSingleWorkshop', {DETAIL}
+      environment.nodeUrl + '/account/UpdateWorkshop', {DETAIL}
     ).pipe(map(response => {
       if (response.message === 'Success') {
         return response.message;
@@ -99,7 +99,7 @@ export class ManageUserService {
 
   SelectVehicle() {
     this.http.get<{message: string; result: any}>(
-      environment.nodeUrl + '/account/SelectVehicle'
+      environment.nodeUrl + '/driver/SelectVehicle'
     ).subscribe(async response => {
       if (response.message === 'Success') {
         this.$SelectVehicle.next(response.result);

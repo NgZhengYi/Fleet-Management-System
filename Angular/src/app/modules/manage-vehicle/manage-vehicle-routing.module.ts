@@ -15,7 +15,7 @@ const routes: Routes = [
     component: InsertVehicleComponent
   },
   {
-    path: 'update-vehicle/:ID',
+    path: 'update-vehicle',
     component: UpdateVehicleComponent
   }
 ];

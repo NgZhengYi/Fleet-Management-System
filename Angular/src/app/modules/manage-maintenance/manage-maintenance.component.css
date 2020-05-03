@@ -1,0 +1,42 @@
+.content-container {
+  height: 92.5%
+}
+
+.action-container {
+  height: 7.5%;
+  text-align: center;
+}
+
+.button-margin {
+  margin: 1% 0.25% 0 0.25%;
+  height: 75%;
+}
+
+.spinner-cover {
+  width: 100%;
+  height: 100%;
+}
+
+.container-padding {
+  padding: 0.25%;
+  border-bottom: 1px solid #d9d9d9;
+}
+
+.scroll-viewport {
+  height: 95%;
+}
+
+.list-header {
+  text-align: center;
+  font-size: larger;
+  font-weight: bold;
+  background-color: aliceblue;
+  border-radius: 5px;
+  border-top: 1px solid #d9d9d9;
+  border-left: 1px solid #d9d9d9;
+  border-right: 1px solid #d9d9d9;
+}
+
+::-webkit-scrollbar {
+  display: none;
+}

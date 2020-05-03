@@ -3,30 +3,26 @@
 </div>
 
 <div class="content-container">
-  <nz-table #table nzBordered [nzData]="dataSet" [nzPageSize]="10" [nzLoading]="loading" nzSize="middle">
+  <nz-table #table nzBordered [nzData]="dataSet" [nzPageSize]="10" [nzLoading]="loading" nzSize="small">
     <thead>
     <tr>
-      <th>CODE</th>
-      <th>NAME</th>
-      <th>TYPE</th>
-      <th>PLATE</th>
-      <th>STATUS</th>
-      <th>ACTION</th>
+      <th nzWidth="20%">CODE</th>
+      <th nzWidth="15%">TYPE</th>
+      <th nzWidth="15%">PLATE</th>
+      <th nzWidth="15%">LAST MAINTENANCE</th>
+      <th nzWidth="15%">STATUS</th>
+      <th nzWidth="20%">ACTION</th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let vehicle of table.data">
       <td>{{ vehicle.vehicle_code }}</td>
-      <td>{{ vehicle.vehicle_name }}</td>
       <td>{{ vehicle.vehicle_type }}</td>
       <td>{{ vehicle.vehicle_plate }}</td>
+      <td>{{ vehicle.vehicle_last_maintenance }}</td>
       <td>{{ vehicle.vehicle_status }}</td>
       <td>
-        <a routerLink="/manage-vehicle/update-vehicle/{{vehicle.auto_id}}"
-           [queryParams]="{CODE : vehicle.vehicle_code, NAME : vehicle.vehicle_name, TYPE : vehicle.vehicle_type,
-            PLATE : vehicle.vehicle_plate, STATUS : vehicle.vehicle_status}">
-          Edit
-        </a>
+        <a routerLink="/manage-vehicle/update-vehicle" [queryParams]="{AUTO_IDENTITY: vehicle.auto_id}">UPDATE</a>
       </td>
     </tr>
     </tbody>
