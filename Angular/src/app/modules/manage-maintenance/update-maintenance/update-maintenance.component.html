@@ -1,0 +1,104 @@
+<div class="title-container">
+  <span>Update Maintenance</span>
+</div>
+
+<nz-spin class="spinner-cover" nzSize="large" [nzSpinning]="Loading">
+  <div *ngIf="FormReady">
+    <form nz-form [nzLayout]="'vertical'" [formGroup]="MaintenanceFormGroup" (ngSubmit)="updateForm()">
+      <div class="row">
+        <div class="col-6 column-padding">
+          <nz-form-item>
+            <nz-form-label nzRequired>Workshop Code</nz-form-label>
+            <nz-form-control>
+              <input nz-input type="text" formControlName="workshop_code">
+              <input type="hidden" formControlName="workshop_identity">
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="col-6 column-padding">
+          <nz-form-item>
+            <nz-form-label nzRequired>Workshop Name</nz-form-label>
+            <nz-form-control>
+              <input nz-input type="text" formControlName="workshop_name">
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 column-padding">
+          <nz-form-item>
+            <nz-form-label nzRequired>Vehicle Code</nz-form-label>
+            <nz-form-control>
+              <input nz-input type="text" formControlName="vehicle_code">
+              <input type="hidden" formControlName="workshop_identity">
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="col-6 column-padding">
+          <nz-form-item>
+            <nz-form-label nzRequired>Vehicle Plate</nz-form-label>
+            <nz-form-control>
+              <input nz-input type="text" formControlName="vehicle_plate">
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 column-padding">
+          <nz-form-item>
+            <nz-form-label nzRequired>Vehicle Manufacturer</nz-form-label>
+            <nz-form-control>
+              <input nz-input type="text" formControlName="vehicle_manufacturer">
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="col-6 column-padding">
+          <nz-form-item>
+            <nz-form-label nzRequired>Vehicle Model</nz-form-label>
+            <nz-form-control>
+              <input nz-input type="text" formControlName="vehicle_model">
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-6 column-padding">
+          <nz-form-item>
+            <nz-form-label>Maintenance Date</nz-form-label>
+            <nz-form-control>
+              <input nz-input type="date" formControlName="scheduled_date">
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+        <div class="col-6 column-padding">
+          <nz-form-item>
+            <nz-form-label>Maintenance Status</nz-form-label>
+            <nz-form-control>
+              <nz-select formControlName="maintenance_status">
+                <nz-option nzValue="PENDING" nzLabel="PENDING"></nz-option>
+                <nz-option nzValue="PROCESSING" nzLabel="PROCESSING"></nz-option>
+                <nz-option nzValue="COMPLETED" nzLabel="COMPLETED"></nz-option>
+              </nz-select>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-12 column-padding">
+          <nz-form-item>
+            <nz-form-label>Maintenance Description</nz-form-label>
+            <nz-form-control>
+              <textarea nz-input formControlName="maintenance_description" rows="3"></textarea>
+            </nz-form-control>
+          </nz-form-item>
+        </div>
+      </div>
+      <nz-form-item class="text-center">
+        <nz-form-control>
+          <button nz-button nzType="primary" class="button-margin" type="submit">Update</button>
+          <button nz-button nzType="default" class="button-margin" routerLink="/manage-maintenance">Back</button>
+        </nz-form-control>
+      </nz-form-item>
+    </form>
+  </div>
+</nz-spin>

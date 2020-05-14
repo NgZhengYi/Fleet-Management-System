@@ -77,8 +77,8 @@ router.post('/RegisterNewUser', (req, res) => {
             VALUES ($1, $2, $3, $4, $5) RETURNING auto_id`;
         let driver_detail = `INSERT INTO VMS_DRIVER_DETAIL (driver_code, driver_name, driver_license, driver_type, 
             driver_account_identity) VALUES ($1, $2, $3, $4, $5)`;
-        let workshop_detail = `INSERT INTO VMS_WORKSHOP_DETAIL (workshop_code, workshop_location, workshop_address) 
-            VALUES ($1, $2, $3)`;
+        let workshop_detail = `INSERT INTO VMS_WORKSHOP (workshop_code, workshop_name, workshop_region, workshop_address) 
+            VALUES ($1, $2, $3, $4)`;
 
         let password = await bcrypt.hashSync(account.password, 10);
 
@@ -111,11 +111,11 @@ router.post('/RegisterNewUser', (req, res) => {
 });
 
 router.get('/LoadWorkshop', (req, res) => {
-    let sqlFetchWorkshop = `SELECT auto_id, workshop_code, workshop_name, workshop_region, workshop_address 
-        FROM VMS_WORKSHOP_DETAIL WHERE workshop_status = $1`;
+    let sqlFetchWorkshop = `SELECT auto_id, workshop_code, workshop_name, workshop_region, workshop_status 
+        FROM VMS_WORKSHOP`;
 
     database.task(async task => {
-        return await task.manyOrNone(sqlFetchWorkshop, ['Available'])
+        return await task.manyOrNone(sqlFetchWorkshop);
     }).then(result => {
         return res.status(201).json({message: 'Success', result: result})
     }).catch(error => {
@@ -126,8 +126,8 @@ router.get('/LoadWorkshop', (req, res) => {
 
 router.post('/FetchSingleWorkshop', (req, res) => {
     let workshop_identity = req.body.ID;
-    let sqlFetchWorkshop = `SELECT auto_id, workshop_code, workshop_name, workshop_region, workshop_address
-        FROM VMS_WORKSHOP_DETAIL WHERE auto_id = $1`;
+    let sqlFetchWorkshop = `SELECT workshop_code, workshop_name, workshop_region, workshop_address, workshop_status 
+        FROM VMS_WORKSHOP WHERE auto_id = $1`;
 
     database.task(async task => {
         return await task.manyOrNone(sqlFetchWorkshop, [workshop_identity]);
@@ -139,12 +139,13 @@ router.post('/FetchSingleWorkshop', (req, res) => {
     });
 });
 
-router.post('/UpdateSingleWorkshop', (req, res) => {
-    const workshop = req.body.DETAIL;
-    let sqlUpdate = `UPDATE VMS_WORKSHOP_DETAIL SET workshop_code = $2, workshop_name = $3, workshop_region = $4, 
-        workshop_address = $5 WHERE auto_id = $1`;
+router.post('/UpdateWorkshop', (req, res) => {
+    let workshop = req.body.DETAIL;
+    console.log(workshop);
+    let sqlUpdate = `UPDATE VMS_WORKSHOP SET workshop_code = $2, workshop_name = $3, workshop_region = $4, 
+        workshop_address = $5, workshop_status = $6 WHERE auto_id = $1`;
     let sqlParams = [workshop.workshop_identity, workshop.workshop_code, workshop.workshop_name,
-        workshop.workshop_region, workshop.workshop_address];
+        workshop.workshop_region, workshop.workshop_address, workshop.workshop_status];
 
     database.task(async task => {
         return await task.manyOrNone(sqlUpdate, sqlParams);

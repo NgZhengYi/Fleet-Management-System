@@ -1,19 +1,21 @@
 <nz-table #table nzBordered [nzData]="workshopList" [nzPageSize]="10" [nzLoading]="loading" nzSize="small">
   <thead>
   <tr>
-    <th class="table-header-style">WORKSHOP CODE</th>
-    <th class="table-header-style">WORKSHOP NAME</th>
-    <th class="table-header-style">WORKSHOP REGION</th>
-    <th class="table-header-style">ACTION</th>
+    <th class="table-header-style" nzWidth="15%">WORKSHOP CODE</th>
+    <th class="table-header-style" nzWidth="55%">WORKSHOP NAME</th>
+    <th class="table-header-style" nzWidth="15%">WORKSHOP REGION</th>
+    <th class="table-header-style" nzWidth="15%">WORKSHOP STATUS</th>
+    <th class="table-header-style" nzWidth="10%">ACTION</th>
   </tr>
   </thead>
   <tbody>
   <tr *ngFor="let workshop of table.data">
-    <td>{{workshop.workshop_code}}</td>
-    <td>{{workshop.workshop_name}}</td>
-    <td>{{workshop.workshop_region}}</td>
+    <td class="text-center">{{workshop.workshop_code}}</td>
+    <td class="text-center">{{workshop.workshop_name}}</td>
+    <td class="text-center">{{workshop.workshop_region}}</td>
+    <td class="text-center">{{workshop.workshop_status}}</td>
     <td class="text-center">
-      <a routerLink="/manage-user/workshop-detail" [queryParams]="{AUTO_IDENTITY: workshop.auto_id}">UPDATE | VIEW</a>
+      <a routerLink="/manage-user/workshop-detail" [queryParams]="{AUTO_IDENTITY: workshop.auto_id}">UPDATE</a>
     </td>
   </tr>
   </tbody>

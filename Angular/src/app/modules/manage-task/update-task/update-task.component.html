@@ -19,7 +19,7 @@
             <nz-form-label>Task Driver</nz-form-label>
             <nz-form-control>
               <nz-input-group nzSearch [nzAddOnAfter]="buttonIcon">
-                <input nz-input formControlName="task_driver" placeholder="Assign Driver">
+                <input nz-input formControlName="task_driver" placeholder="Assign Driver" readonly>
                 <input type="hidden" formControlName="driver_identity">
               </nz-input-group>
               <ng-template #buttonIcon>

@@ -50,7 +50,7 @@ router.post('/NewTask', (req, res) => {
 
     database.task(async t => {
         if (task.task_driver) {
-            let validationParams = [task.task_driver, task.task_date_start, task.task_date_end];
+            let validationParams = [task.driver_identity, task.task_date_start, task.task_date_end];
             let validationCount = await t.manyOrNone(taskValidationQuery, validationParams);
 
             if (validationCount[0].count !== '0') {
@@ -59,7 +59,7 @@ router.post('/NewTask', (req, res) => {
                 let task_identity = await t.manyOrNone(taskQuery, taskParams);
                 let taskAssignmentQuery = `INSERT INTO VMS_TASK_ASSIGNMENT (task_identity, driver_identity, task_assigned_by, 
                 task_assigned_timestamp) VALUES ($1, $2, $3, current_timestamp)`;
-                await t.manyOrNone(taskAssignmentQuery, [task_identity[0].auto_id, task.task_driver, task.task_created_by]);
+                await t.manyOrNone(taskAssignmentQuery, [task_identity[0].auto_id, task.driver_identity, task.task_created_by]);
                 return {message: 'Success'};
             }
         } else {

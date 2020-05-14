@@ -9,7 +9,7 @@
             {{item.scheduled_date | slice : 0 : 10}}
           </ng-template>
           <ng-template #ScheduledAction>
-            <a routerLink="/manage-maintenance/maintenance-detail" [queryParams]="{AUTO_IDENTITY: item.auto_id}">VIEW</a>
+            <a routerLink="/manage-maintenance/update-maintenance" [queryParams]="{AUTO_IDENTITY: item.auto_id}">VIEW</a>
           </ng-template>
         </nz-list-item>
       </nz-list>
@@ -25,7 +25,7 @@
             {{item.completed_date | slice : 0 : 10}}
           </ng-template>
           <ng-template #CompletedAction>
-            <a routerLink="/manage-maintenance/maintenance-detail" [queryParams]="{AUTO_IDENTITY: item.auto_id}">VIEW</a>
+            <a routerLink="/manage-maintenance/update-maintenance" [queryParams]="{AUTO_IDENTITY: item.auto_id}">VIEW</a>
           </ng-template>
         </nz-list-item>
       </nz-list>
@@ -37,7 +37,7 @@
   <button class="button-margin" nz-button nzType="primary" routerLink="/manage-maintenance/new-maintenance">
     New Maintenance Schedule
   </button>
-  <button class="button-margin" nz-button nzType="primary" routerLink="/manage-maintenance/maintenance-history">
+  <button class="button-margin" nz-button nzType="primary" routerLink="/manage-maintenance/history-maintenance">
     Vehicle Maintenance History
   </button>
 </div>

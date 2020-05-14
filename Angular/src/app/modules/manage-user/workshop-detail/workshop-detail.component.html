@@ -36,6 +36,15 @@
           </nz-form-control>
         </nz-form-item>
         <nz-form-item>
+          <nz-form-label [nzSpan]="4">Workshop Status</nz-form-label>
+          <nz-form-control [nzSpan]="16">
+            <nz-select formControlName="workshop_status">
+              <nz-option nzValue="Available" nzLabel="Available"></nz-option>
+              <nz-option nzValue="Not Available" nzLabel="Not Available"></nz-option>
+            </nz-select>
+          </nz-form-control>
+        </nz-form-item>
+        <nz-form-item>
           <nz-form-control nzOffset="4">
             <button nz-button type="submit" nzType="primary" class="button-margin">Update</button>
             <button nz-button type="button" nzType="default" class="button-margin" routerLink="/manage-user"

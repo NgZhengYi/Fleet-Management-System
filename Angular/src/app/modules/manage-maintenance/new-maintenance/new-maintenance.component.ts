@@ -3,7 +3,6 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {ManageMaintenanceService} from '../manage-maintenance.service';
 import {ToastrService} from 'ngx-toastr';
 import {first} from 'rxjs/operators';
-import {Subscription} from 'rxjs';
 
 @Component({
   selector: 'app-new-maintenance',
@@ -12,11 +11,12 @@ import {Subscription} from 'rxjs';
 })
 export class NewMaintenanceComponent implements OnInit {
   MaintenanceFormGroup: FormGroup;
-  private selection: Subscription;
-  private workshopList = [];
-  workshopOptions = [];
-  private vehicleList = [];
-  vehicleOptions = [];
+  WorkshopModalVisible = false;
+  VehicleModalVisible = false;
+  LoadingWorkshop = true;
+  LoadingVehicle = true;
+  WorkshopList = [];
+  VehicleList = [];
 
   constructor(private manageMaintenanceService: ManageMaintenanceService, private formBuilder: FormBuilder, private toast: ToastrService) {
 
@@ -24,27 +24,60 @@ export class NewMaintenanceComponent implements OnInit {
 
   ngOnInit(): void {
     this.MaintenanceFormGroup = this.formBuilder.group({
-      workshop: ['', Validators.required],
-      vehicle: ['', Validators.required],
+      workshop_identity: ['', Validators.required],
+      workshop_name: ['', Validators.required],
+      vehicle_identity: ['', Validators.required],
+      vehicle_code: ['', Validators.required],
       date: ['', Validators.required]
     });
+  }
 
-    this.manageMaintenanceService.AutoFieldOptions();
+  onSelectWorkshop() {
+    this.WorkshopModalVisible = true;
+    this.manageMaintenanceService.SelectWorkshop();
 
-    this.selection = this.manageMaintenanceService.$SelectionSubject.subscribe(value => {
-      this.vehicleList = value.vehicle;
-      this.workshopList = value.workshop;
-      this.selection.unsubscribe();
+    this.manageMaintenanceService.$Workshop.subscribe(value => {
+      console.log(value);
+      this.WorkshopList = value;
+      this.LoadingWorkshop = false;
     });
-
   }
 
-  onWorkshopAutoComplete(v: string) {
-    this.workshopOptions = this.workshopList.filter(value => value.workshop_name.toUpperCase().indexOf(v.toUpperCase()) === 0);
+  onSelectVehicle() {
+    this.VehicleModalVisible = true;
+    this.manageMaintenanceService.SelectVehicle();
+
+    this.manageMaintenanceService.$Vehicle.subscribe(value => {
+      console.log(value);
+      this.VehicleList = value;
+      this.LoadingVehicle = false;
+    });
   }
 
-  onVehicleAutoComplete(v: string) {
-    this.vehicleOptions = this.vehicleList.filter(value => value.vehicle_code.toUpperCase().indexOf(v.toUpperCase()) === 0);
+  onWorkshopSelected(ID, NAME) {
+    this.WorkshopModalVisible = false;
+
+    this.MaintenanceFormGroup.patchValue({
+      workshop_identity: ID,
+      workshop_name: NAME
+    });
+  }
+
+  onVehicleSelected(ID, CODE) {
+    this.VehicleModalVisible = false;
+
+    this.MaintenanceFormGroup.patchValue({
+      vehicle_identity: ID,
+      vehicle_code: CODE
+    });
+  }
+
+  onWorkshopModalCancel() {
+    this.WorkshopModalVisible = false;
+  }
+
+  onVehicleModalCancel() {
+    this.VehicleModalVisible = false;
   }
 
   submitForm() {

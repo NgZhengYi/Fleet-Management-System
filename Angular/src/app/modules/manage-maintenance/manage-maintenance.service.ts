@@ -10,7 +10,11 @@ import {environment} from '../../../environments/environment';
 })
 export class ManageMaintenanceService {
   $MaintenanceList: Subject<any> = new Subject<any>();
-  $SelectionSubject: Subject<any> = new Subject<any>();
+  $Workshop: Subject<any> = new Subject<any>();
+  $Vehicle: Subject<any> = new Subject<any>();
+  $Maintenance: Subject<any> = new Subject<any>();
+  $HistoryMaintenance: Subject<any> = new Subject<any>();
+  $VehicleCodeList: Subject<any> = new Subject<any>();
 
   constructor(private http: HttpClient) {
   }
@@ -40,7 +44,7 @@ export class ManageMaintenanceService {
 
   UpdateMaintenance(maintenance) {
     return this.http.post<{ message: string }>(
-      environment.nodeUrl + '/maintenance/UpdateMaintenance', {maintenance}
+      environment.nodeUrl + '/maintenance/Update-Maintenance', {maintenance}
     ).pipe(map(response => {
       if (response.message === 'Success') {
         return 'Success';
@@ -50,16 +54,64 @@ export class ManageMaintenanceService {
     }));
   }
 
-  AutoFieldOptions() {
-    this.http.get<{ message: string; workshop: any; vehicle: any }>(
-      environment.nodeUrl + '/maintenance/MaintenanceAutoField'
+  SelectWorkshop() {
+    this.http.get<{ message: string; result: any }>(
+      environment.nodeUrl + '/maintenance/SelectWorkshop'
     ).subscribe(async response => {
       if (response.message === 'Success') {
-        const content = {workshop: response.workshop, vehicle: response.vehicle};
-        this.$SelectionSubject.next(content);
+        this.$Workshop.next(response.result);
       }
     });
+  }
 
+  SelectVehicle() {
+    this.http.get<{ message: string; result: any }>(
+      environment.nodeUrl + '/maintenance/SelectVehicle'
+    ).subscribe(async response => {
+      if (response.message === 'Success') {
+        this.$Vehicle.next(response.result);
+      }
+    });
+  }
+
+  SingleMaintenance(ID) {
+    this.http.post<{ message: string; result: any }>(
+      environment.nodeUrl + '/maintenance/SingleMaintenance', {ID}
+    ).subscribe(async response => {
+      if (response.message === 'Success') {
+        this.$Maintenance.next(response.result);
+      }
+    });
+  }
+
+  HistoryMaintenance() {
+    this.http.get<{ message: string; result: any }>(
+      environment.nodeUrl + '/maintenance/History-Maintenance'
+    ).subscribe(async response => {
+      if (response.message === 'Success') {
+        this.$HistoryMaintenance.next(response.result);
+      }
+    });
+  }
+
+  SingleVehicleHistoryMaintenance(CODE) {
+    this.http.post<{ message: string; result: any }>(
+      environment.nodeUrl + '/maintenance/Single-Vehicle-History-Maintenance', {CODE}
+    ).subscribe(async response => {
+      if (response.message === 'Success') {
+        this.$HistoryMaintenance.next(response.result);
+      }
+    });
+  }
+
+  VehicleCodeList() {
+    this.http.get<{ message: string; result: any }>(
+      environment.nodeUrl + '/maintenance/Vehicle-Code-List'
+    ).subscribe(async response => {
+      if (response.message === 'Success') {
+        this.$VehicleCodeList.next(response.result);
+      }
+    });
   }
 
 }

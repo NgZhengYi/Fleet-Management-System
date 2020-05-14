@@ -10,15 +10,14 @@
     <div class="d-flex flex-column col-md-4 box-shadow">
       <nz-spin class="cover" nzSize="large" [nzSpinning]="Loading">
         <div *ngIf="Ready">
-
+          <nz-descriptions></nz-descriptions>
         </div>
       </nz-spin>
     </div>
     <div class="d-flex flex-column col-md-4 box-shadow">
       <nz-spin class="cover" nzSize="large" [nzSpinning]="Loading">
         <div *ngIf="Ready">
-          <canvas baseChart [chartType]="vehicleStatusChartType" [data]="chartVehicleStatusData"
-                  [labels]="chartVehicleStatusLabel" [options]="chartVehicleStatusOptions"></canvas>
+
         </div>
       </nz-spin>
     </div>
@@ -27,22 +26,42 @@
     <div class="d-flex flex-column col-md-4 box-shadow">
       <nz-spin class="cover" nzSize="large" [nzSpinning]="Loading">
         <div *ngIf="Ready">
-
+          <div class="row" style="margin-top: 10%">
+            <div class="col-6 text-center">
+              <nz-statistic nzTitle="Scheduled Maintenance" [nzValue]="statisticScheduledMaintenance"></nz-statistic>
+            </div>
+            <div class="col-6 text-center">
+              <nz-statistic nzTitle="Completed Maintenance" [nzValue]="statisticCompletedMaintenance"></nz-statistic>
+            </div>
+          </div>
         </div>
       </nz-spin>
     </div>
     <div class="d-flex flex-column col-md-4 box-shadow">
       <nz-spin class="cover" nzSize="large" [nzSpinning]="Loading">
         <div *ngIf="Ready">
-
+          <div class="row" style="margin-top: 10%">
+            <div class="col-6 text-center">
+              <nz-statistic nzTitle="Assigned Vehicle" [nzValue]="statisticAssignedVehicle"></nz-statistic>
+            </div>
+            <div class="col-6 text-center">
+              <nz-statistic nzTitle="Unassigned Vehicle" [nzValue]="statisticUnassignedVehicle"></nz-statistic>
+            </div>
+          </div>
         </div>
       </nz-spin>
     </div>
     <div class="d-flex flex-column col-md-4 box-shadow">
       <nz-spin class="cover" nzSize="large" [nzSpinning]="Loading">
         <div class="cover" *ngIf="Ready">
-          <canvas baseChart [chartType]="vehicleTypeChartType" [data]="chartVehicleTypeData"
-                  [labels]="chartVehicleTypeLabel" [options]="chartVehicleTypeOptions"></canvas>
+          <div class="row" style="margin-top: 10%">
+            <div class="col-6 text-center">
+              <nz-statistic nzTitle="Available Workshop" [nzValue]="statisticAvailableWorkshop"></nz-statistic>
+            </div>
+            <div class="col-6 text-center">
+              <nz-statistic nzTitle="Total Workshop" [nzValue]="statisticTotalWorkshop"></nz-statistic>
+            </div>
+          </div>
         </div>
       </nz-spin>
     </div>
@@ -51,14 +70,16 @@
     <div class="d-flex flex-column col-md-4 box-shadow">
       <nz-spin class="cover" nzSize="large" [nzSpinning]="Loading">
         <div *ngIf="Ready">
-
+          <canvas baseChart [chartType]="ChartTypeDoughnut" [data]="chartDriverTypeData"
+                  [labels]="chartDriverTypeLabel" [options]="chartDriverTypeOptions"></canvas>
         </div>
       </nz-spin>
     </div>
     <div class="d-flex flex-column col-md-4 box-shadow">
       <nz-spin class="cover" nzSize="large" [nzSpinning]="Loading">
         <div *ngIf="Ready">
-
+          <canvas baseChart [chartType]="ChartTypeDoughnut" [data]="chartTaskData" [labels]="chartTaskLabel"
+                  [options]="chartTaskOptions"></canvas>
         </div>
       </nz-spin>
     </div>

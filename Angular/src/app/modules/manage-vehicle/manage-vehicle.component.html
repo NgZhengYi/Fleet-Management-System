@@ -6,12 +6,13 @@
   <nz-table #table nzBordered [nzData]="dataSet" [nzPageSize]="10" [nzLoading]="loading" nzSize="small">
     <thead>
     <tr>
-      <th nzWidth="20%">CODE</th>
+      <th nzWidth="15%">CODE</th>
       <th nzWidth="15%">TYPE</th>
       <th nzWidth="15%">PLATE</th>
+      <th nzWidth="15%">MANUFACTURER</th>
       <th nzWidth="15%">LAST MAINTENANCE</th>
       <th nzWidth="15%">STATUS</th>
-      <th nzWidth="20%">ACTION</th>
+      <th class="text-center" nzWidth="10%">ACTION</th>
     </tr>
     </thead>
     <tbody>
@@ -19,9 +20,10 @@
       <td>{{ vehicle.vehicle_code }}</td>
       <td>{{ vehicle.vehicle_type }}</td>
       <td>{{ vehicle.vehicle_plate }}</td>
-      <td>{{ vehicle.vehicle_last_maintenance }}</td>
+      <td>{{ vehicle.vehicle_manufacturer }}</td>
+      <td class="text-center">{{ vehicle.vehicle_last_maintenance }}</td>
       <td>{{ vehicle.vehicle_status }}</td>
-      <td>
+      <td class="text-center">
         <a routerLink="/manage-vehicle/update-vehicle" [queryParams]="{AUTO_IDENTITY: vehicle.auto_id}">UPDATE</a>
       </td>
     </tr>
@@ -30,5 +32,6 @@
 </div>
 
 <div class="action-container">
-  <button nz-button nzType="default" routerLink="/manage-vehicle/insert-vehicle" class="button-margin">New Vehicle</button>
+  <button nz-button nzType="default" routerLink="/manage-vehicle/insert-vehicle" class="button-margin">New Vehicle
+  </button>
 </div>

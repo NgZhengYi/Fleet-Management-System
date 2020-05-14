@@ -1,4 +1,4 @@
-.title-container {
+.page-title-container {
   height: 7.5%;
   text-align: center;
   font-size: xx-large;
@@ -6,8 +6,14 @@
   margin: 0 0 1% 0;
 }
 
-.content-container {
-  height: 92.5%;
+.page-content-container {
+  height: 85%;
+  margin: 0.5% 0 0.5% 0;
+}
+
+.page-action-container {
+  height: 7.5%;
+  text-align: center;
 }
 
 .button-margin {

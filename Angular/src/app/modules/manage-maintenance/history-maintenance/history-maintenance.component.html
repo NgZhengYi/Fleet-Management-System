@@ -1,0 +1,74 @@
+<div class="page-title-container">
+  <span>History Maintenance</span>
+</div>
+<div class="page-content-container">
+  <nz-table #table nzBordered [nzData]="MaintenanceHistoryList" [nzPageSize]="10" [nzLoading]="TableLoading"
+            nzSize="small">
+    <thead>
+    <tr>
+      <th class="text-center" nzWidth="20%">VEHICLE</th>
+      <th class="text-center" nzWidth="20%">MODEL</th>
+      <th class="text-center" nzWidth="20%">WORKSHOP</th>
+      <th class="text-center" nzWidth="20%">NAME</th>
+      <th class="text-center" nzWidth="10%">DATE</th>
+      <th class="text-center" nzWidth="10%">DETAIL</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let item of table.data">
+      <td>{{item.vehicle_code}}</td>
+      <td>{{item.vehicle_model}}</td>
+      <td>{{item.workshop_code}}</td>
+      <td>{{item.workshop_name}}</td>
+      <td class="text-center">{{item.completed_date}}</td>
+      <td class="text-center">
+        <a (click)="onVehicleDetail(item.auto_id)">VIEW</a>
+      </td>
+    </tr>
+    </tbody>
+  </nz-table>
+</div>
+<div class="page-action-container">
+  <button nz-button class="button-margin" nzType="primary" type="button" (click)="onVehicleSearch()">Search Vehicle
+  </button>
+  <button nz-button class="button-margin" nzType="danger" type="button" (click)="onDefaultList()">Default List</button>
+  <button nz-button class="button-margin" nzType="default" type="button" routerLink="/manage-maintenance">Back</button>
+</div>
+
+<nz-modal [(nzVisible)]="SearchModalVisible" nzWidth="50%" nzTitle="Select Vehicle" (nzOnCancel)="onModalCancel()"
+          [nzContent]="SearchModalContent" [nzFooter]="SearchModalFooter">
+  <ng-template #SearchModalContent>
+    <nz-input-group nzSearch [nzAddOnAfter]="SearchButton">
+      <input nz-input [formControl]="VehicleCode" placeholder="Vehicle Code" [nzAutocomplete]="VehicleCodeAutoComplete"
+             (input)="onVehicleCodeAutoComplete($event.target?.value)">
+    </nz-input-group>
+    <nz-autocomplete nzBackfill #VehicleCodeAutoComplete>
+      <nz-auto-option *ngFor="let option of VehicleCodeOptions" [nzValue]="option.vehicle_code">
+        {{option.vehicle_code}}
+      </nz-auto-option>
+    </nz-autocomplete>
+    <ng-template #SearchButton>
+      <button nz-button nzSearch type="button" nzType="primary" (click)="onVehicleSearchSubmit()">
+        <i nz-icon nzType="search"></i>
+      </button>
+    </ng-template>
+  </ng-template>
+  <ng-template #SearchModalFooter></ng-template>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="DetailModalVisible" nzWidth="80%" nzTitle="Vehicle Maintenance Detail"
+          (nzOnCancel)="onModalCancel()"
+          [nzContent]="DetailModalContent" [nzFooter]="DetailModalFooter">
+  <ng-template #DetailModalContent>
+    <nz-descriptions nzSize="small" nzBordered>
+      <nz-descriptions-item nzTitle="Code">{{ MaintenanceDetail.vehicle_code}}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Plate">{{ MaintenanceDetail.vehicle_plate }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Manufacturer">{{ MaintenanceDetail.vehicle_manufacturer }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Model">{{ MaintenanceDetail.vehicle_model }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Workshop">{{ MaintenanceDetail.workshop_name }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Date">{{ MaintenanceDetail.completed_date }}</nz-descriptions-item>
+      <nz-descriptions-item nzTitle="Description">{{ MaintenanceDetail.maintenance_description }}</nz-descriptions-item>
+    </nz-descriptions>
+  </ng-template>
+  <ng-template #DetailModalFooter></ng-template>
+</nz-modal>

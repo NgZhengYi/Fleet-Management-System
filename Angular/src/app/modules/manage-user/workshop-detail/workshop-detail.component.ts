@@ -36,8 +36,9 @@ export class WorkshopDetailComponent implements OnInit {
         workshop_identity: [this.WorkshopIdentity],
         workshop_code: [value.workshop_code, Validators.required],
         workshop_name: [value.workshop_name, Validators.required],
-        workshop_region: [value.workshop_region, Validators.required],
-        workshop_address: [value.workshop_address, Validators.required]
+        workshop_region: [value.workshop_region],
+        workshop_address: [value.workshop_address, Validators.required],
+        workshop_status: [value.workshop_status]
       });
 
       this.loading = false;

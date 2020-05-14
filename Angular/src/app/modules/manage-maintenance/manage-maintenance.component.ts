@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-
 import {ManageMaintenanceService} from './manage-maintenance.service';
 
 @Component({

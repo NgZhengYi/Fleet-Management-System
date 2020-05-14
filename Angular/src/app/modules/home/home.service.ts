@@ -8,17 +8,17 @@ import {environment} from '../../../environments/environment';
   providedIn: 'root'
 })
 export class HomeService {
-  $DashboardData: Subject<any> = new Subject<any>();
+  $Data: Subject<any> = new Subject<any>();
 
   constructor(private http: HttpClient) {
   }
 
   LoadDashboardData() {
-    this.http.post<{ message: string; result: any }>(
-      environment.nodeUrl + '/vehicle/LoadDashboardData', {}
+    this.http.get<{ message: string; result: any }>(
+      environment.nodeUrl + '/home/HomeData'
     ).subscribe(async response => {
       if (response.message === 'Success') {
-        this.$DashboardData.next(response.result);
+        this.$Data.next(response.result);
       }
     });
   }

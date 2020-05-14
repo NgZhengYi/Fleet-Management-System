@@ -15,15 +15,20 @@ export class HomeComponent implements OnInit {
   Loading = true;
   Ready = false;
 
-  chartVehicleStatusLabel: Label;
-  chartVehicleStatusData: SingleDataSet;
-  vehicleStatusChartType: ChartType;
-  chartVehicleStatusOptions: ChartOptions;
+  ChartTypeDoughnut: ChartType = 'doughnut';
+  chartDriverTypeLabel: Label;
+  chartDriverTypeData: SingleDataSet;
+  chartDriverTypeOptions: ChartOptions;
+  chartTaskLabel: Label;
+  chartTaskData: SingleDataSet;
+  chartTaskOptions: ChartOptions;
 
-  chartVehicleTypeLabel: Label;
-  chartVehicleTypeData: SingleDataSet;
-  vehicleTypeChartType: ChartType;
-  chartVehicleTypeOptions: ChartOptions;
+  statisticAssignedVehicle: number;
+  statisticUnassignedVehicle: number;
+  statisticAvailableWorkshop: number;
+  statisticTotalWorkshop: number;
+  statisticScheduledMaintenance: number;
+  statisticCompletedMaintenance: number;
 
   constructor(private homeService: HomeService) {
   }
@@ -31,43 +36,50 @@ export class HomeComponent implements OnInit {
   ngOnInit(): void {
     this.homeService.LoadDashboardData();
 
-    this.$DashboardData = this.homeService.$DashboardData.subscribe(value => {
-      this.chartVehicleStatusData = [
-        parseInt(value.vehicle_status_available, 10),
-        parseInt(value.vehicle_status_assigned, 10),
-        parseInt(value.vehicle_status_maintenance, 10)
+    this.$DashboardData = this.homeService.$Data.subscribe(value => {
+      this.chartDriverTypeData = [
+        parseInt(value.DriverType[0].a, 10),
+        parseInt(value.DriverType[0].b, 10),
+        parseInt(value.DriverType[0].c, 10),
+        parseInt(value.DriverType[0].d, 10)
       ];
 
-      this.chartVehicleTypeData = [
-        parseInt(value.vehicle_type_big, 10),
-        parseInt(value.vehicle_type_medium, 10),
-        parseInt(value.vehicle_type_small, 10)
+      this.chartTaskData = [
+        parseInt(value.TaskStatus[0].ongoing, 10),
+        parseInt(value.TaskStatus[0].upcoming, 10),
+        parseInt(value.TaskStatus[0].unassigned, 10)
       ];
+
+      this.statisticAssignedVehicle = parseInt(value.VehicleStatus[0].assigned_vehicle, 10);
+      this.statisticUnassignedVehicle = parseInt(value.VehicleStatus[0].unassigned_vehicle, 10);
+      this.statisticAvailableWorkshop = parseInt(value.WorkshopStatus[0].available_workshop, 10);
+      this.statisticTotalWorkshop = parseInt(value.WorkshopStatus[0].total_workshop, 10);
+      this.statisticScheduledMaintenance = parseInt(value.MaintenanceStatus[0].pending, 10);
+      this.statisticCompletedMaintenance = parseInt(value.MaintenanceStatus[0].completed, 10);
 
       this.Loading = false;
       this.Ready = true;
       this.$DashboardData.unsubscribe();
     });
 
-    this.chartVehicleStatusLabel = ['AVAILABLE', 'ASSIGNED', 'MAINTENANCE'];
-    this.vehicleStatusChartType = 'doughnut';
-    this.chartVehicleStatusOptions = {
+    this.chartDriverTypeLabel = ['A', 'B', 'C', 'D'];
+    this.chartDriverTypeOptions = {
       title: {
-        text: 'Vehicle Status',
+        text: 'Driver Type',
         display: true,
         fontSize: 18
       }
     };
 
-    this.chartVehicleTypeLabel = ['BIG', 'MEDIUM', 'SMALL'];
-    this.vehicleTypeChartType = 'doughnut';
-    this.chartVehicleTypeOptions = {
+    this.chartTaskLabel = ['Ongoing', 'Upcoming', 'Unassigned'];
+    this.chartTaskOptions = {
       title: {
-        text: 'Vehicle Type',
+        text: 'Task Status',
         display: true,
         fontSize: 18
       }
     };
+
   }
 
 }

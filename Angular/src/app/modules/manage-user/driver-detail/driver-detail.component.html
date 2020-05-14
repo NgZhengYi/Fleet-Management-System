@@ -43,7 +43,7 @@
           <nz-form-label [nzSpan]="4">Driver Vehicle</nz-form-label>
           <nz-form-control [nzSpan]="16">
             <nz-input-group nzSearch [nzAddOnAfter]="buttonIcon">
-              <input nz-input formControlName="vehicle_code" placeholder="Assign Driver">
+              <input nz-input formControlName="vehicle_code" placeholder="Assign Driver" readonly>
               <input type="hidden" formControlName="vehicle_identity">
             </nz-input-group>
             <ng-template #buttonIcon>

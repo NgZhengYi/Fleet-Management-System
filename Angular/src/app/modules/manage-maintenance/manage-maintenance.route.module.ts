@@ -3,7 +3,8 @@ import {RouterModule, Routes} from '@angular/router';
 
 import {ManageMaintenanceComponent} from './manage-maintenance.component';
 import {NewMaintenanceComponent} from './new-maintenance/new-maintenance.component';
-import {MaintenanceHistoryComponent} from './maintenance-history/maintenance-history.component';
+import {UpdateMaintenanceComponent} from './update-maintenance/update-maintenance.component';
+import {HistoryMaintenanceComponent} from './history-maintenance/history-maintenance.component';
 
 const routes: Routes = [
   {
@@ -15,8 +16,12 @@ const routes: Routes = [
     component: NewMaintenanceComponent
   },
   {
-    path: 'maintenance-history',
-    component: MaintenanceHistoryComponent
+    path: 'update-maintenance',
+    component: UpdateMaintenanceComponent
+  },
+  {
+    path: 'history-maintenance',
+    component: HistoryMaintenanceComponent
   }
 ];
 

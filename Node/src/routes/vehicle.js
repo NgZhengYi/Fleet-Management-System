@@ -2,27 +2,9 @@ const express = require('express');
 const database = require('../database');
 const router = express.Router();
 
-router.post('/LoadDashboardData', (req, res) => {
-    let sqlFetch = `SELECT SUM(CASE WHEN vehicle_type = 'Big' THEN 1 ELSE 0 END) AS VEHICLE_TYPE_BIG, 
-        SUM(CASE WHEN vehicle_type = 'Medium' THEN 1 ELSE 0 END) AS VEHICLE_TYPE_MEDIUM,
-        SUM(CASE WHEN vehicle_type = 'Small' THEN 1 ELSE 0 END) AS VEHICLE_TYPE_SMALL, 
-        SUM(CASE WHEN vehicle_status = 'Available' THEN 1 ELSE 0 END) AS VEHICLE_STATUS_AVAILABLE, 
-        SUM(CASE WHEN vehicle_status = 'Maintenance' THEN 1 ELSE 0 END) AS VEHICLE_STATUS_MAINTENANCE, 
-        SUM(CASE WHEN vehicle_status = 'Assigned' THEN 1 ELSE 0 END) AS VEHICLE_STATUS_ASSIGNED
-        FROM VMS_VEHICLE_DETAIL`;
-
-    database.task(async task => {
-        return await task.manyOrNone(sqlFetch);
-    }).then(result => {
-        return res.status(201).json({message: 'Success', result: result[0]});
-    }).catch(error => {
-        console.log(error);
-        return res.status(500).json({message: 'Error'});
-    });
-});
-
 router.get('/LoadVehicleData', (req, res) => {
-    let sqlFetch = `SELECT auto_id, vehicle_code, vehicle_type, vehicle_plate, vehicle_last_maintenance, vehicle_status 
+    let sqlFetch = `SELECT auto_id, vehicle_code, vehicle_type, vehicle_plate, vehicle_status, vehicle_manufacturer,  
+        TO_CHAR(vehicle_last_maintenance, 'YYYY-MM-DD') AS vehicle_last_maintenance 
         FROM VMS_VEHICLE ORDER BY CASE vehicle_status
         WHEN 'Available' THEN 1 WHEN 'Maintenance' THEN 2 ELSE 3 END`;
 
@@ -41,7 +23,7 @@ router.post('/InsertVehicle', (req, res) => {
     let vehicleCodeCount = `SELECT COUNT(*) FROM VMS_VEHICLE WHERE vehicle_code = $1`;
     let sqlInsert = `INSERT INTO VMS_VEHICLE (vehicle_code, vehicle_type, vehicle_manufacturer, vehicle_model, 
         vehicle_year, vehicle_max_load, vehicle_plate) VALUES ($1, $2, $3, $4, $5, $6, $7)`;
-    let vehicleParams = [vehicle.vehicle_code, vehicle.vehicle_type, vehicle.vehicle_manufacturer, vehicle.vehicle_model ,
+    let vehicleParams = [vehicle.vehicle_code, vehicle.vehicle_type, vehicle.vehicle_manufacturer, vehicle.vehicle_model,
         vehicle.vehicle_year, vehicle.vehicle_max_load, vehicle.vehicle_plate];
 
     database.task(async task => {
@@ -62,7 +44,9 @@ router.post('/InsertVehicle', (req, res) => {
 
 router.post('/SingleVehicle', (req, res) => {
     let vehicle_identity = req.body.identity;
-    let sqlSelect = `SELECT * FROM VMS_VEHICLE WHERE auto_id = $1`;
+    let sqlSelect = `SELECT vehicle_code, vehicle_type, vehicle_manufacturer, vehicle_model, vehicle_year, vehicle_max_load, 
+        vehicle_plate, vehicle_status, TO_CHAR(vehicle_last_maintenance, 'YYYY-MM-DD') AS vehicle_last_maintenance 
+        FROM VMS_VEHICLE WHERE auto_id = $1`;
 
     database.task(async task => {
         return await task.manyOrNone(sqlSelect, [vehicle_identity]);

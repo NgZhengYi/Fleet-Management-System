@@ -2,9 +2,9 @@ import {BrowserModule} from '@angular/platform-browser';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {HttpClientModule} from '@angular/common/http';
 import {NgModule} from '@angular/core';
-import {registerLocaleData} from '@angular/common';
+import {CommonModule, registerLocaleData} from '@angular/common';
 import en from '@angular/common/locales/en';
-import {en_US, NgZorroAntdModule, NZ_I18N} from 'ng-zorro-antd';
+import {en_US, NZ_I18N} from 'ng-zorro-antd';
 
 import {AppAntModule} from './app.ant.module';
 import {AppComponent} from './app.component';
@@ -27,10 +27,10 @@ registerLocaleData(en);
     AppRouteModule,
     BrowserModule,
     BrowserAnimationsModule,
+    CommonModule,
     CoreModule,
     HttpClientModule,
     LoginModule,
-    NgZorroAntdModule,
   ],
   providers: [
     AuthGuard,

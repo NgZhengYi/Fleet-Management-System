@@ -6,25 +6,29 @@
   <nz-form-item>
     <nz-form-label [nzSpan]="4" nzRequired>Workshop</nz-form-label>
     <nz-form-control [nzSpan]="16">
-      <input nz-input type="text" formControlName="workshop" placeholder="Workshop"
-             [nzAutocomplete]="AutoWorkshop" (input)="onWorkshopAutoComplete($event.target?.value)">
-      <nz-autocomplete nzBackfill #AutoWorkshop>
-        <nz-auto-option *ngFor="let option of workshopOptions" [nzValue]="option.auto_id">
-          {{option.workshop_name}}
-        </nz-auto-option>
-      </nz-autocomplete>
+      <nz-input-group nzSearch [nzAddOnAfter]="searchWorkshopButton">
+        <input nz-input formControlName="workshop_name" placeholder="Select Workshop">
+        <input type="hidden" formControlName="workshop_identity">
+      </nz-input-group>
+      <ng-template #searchWorkshopButton>
+        <button nz-button nzSearch type="button" nzType="primary" (click)="onSelectWorkshop()">
+          <i nz-icon nzType="search"></i>
+        </button>
+      </ng-template>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
     <nz-form-label [nzSpan]="4" nzRequired>Vehicle</nz-form-label>
     <nz-form-control [nzSpan]="16">
-      <input nz-input type="text" formControlName="vehicle" placeholder="Vehicle"
-             [nzAutocomplete]="AutoVehicle" (input)="onVehicleAutoComplete($event.target?.value)">
-      <nz-autocomplete nzBackfill #AutoVehicle>
-        <nz-auto-option *ngFor="let option of vehicleOptions" [nzValue]="option.auto_id">
-          {{option.vehicle_code}}
-        </nz-auto-option>
-      </nz-autocomplete>
+      <nz-input-group nzSearch [nzAddOnAfter]="searchVehicleButton">
+        <input nz-input formControlName="vehicle_code" placeholder="Select Vehicle">
+        <input type="hidden" formControlName="vehicle_identity">
+      </nz-input-group>
+      <ng-template #searchVehicleButton>
+        <button nz-button nzSearch type="button" nzType="primary" (click)="onSelectVehicle()">
+          <i nz-icon nzType="search"></i>
+        </button>
+      </ng-template>
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
@@ -41,3 +45,59 @@
     </nz-form-control>
   </nz-form-item>
 </form>
+
+<nz-modal [(nzVisible)]="WorkshopModalVisible" nzWidth="80%" (nzOnCancel)="onWorkshopModalCancel()"
+          nzTitle="Select Workshop" [nzContent]="workshopModalContent" [nzFooter]="workshopModalFooter">
+  <ng-template #workshopModalContent>
+    <nz-table nzBordered [nzData]="WorkshopList" [nzPageSize]="10" nzSize="small" [nzLoading]="LoadingWorkshop" #WorkshopTable>
+      <thead>
+      <tr>
+        <th nzWidth="30%">CODE</th>
+        <th nzWidth="30%">NAME</th>
+        <th nzWidth="30%">REGION</th>
+        <th nzWidth="10%">ACTION</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of WorkshopTable.data">
+        <td>{{item.workshop_code}}</td>
+        <td>{{item.workshop_name}}</td>
+        <td>{{item.workshop_region}}</td>
+        <td class="text-center">
+          <a (click)="onWorkshopSelected(item.auto_id, item.workshop_name)">SELECT</a>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </ng-template>
+  <ng-template #workshopModalFooter></ng-template>
+</nz-modal>
+
+<nz-modal [(nzVisible)]="VehicleModalVisible" nzWidth="80%" (nzOnCancel)="onVehicleModalCancel()"
+          nzTitle="Select Vehicle" [nzContent]="vehicleModalContent" [nzFooter]="vehicleModalFooter">
+  <ng-template #vehicleModalContent>
+    <nz-table nzBordered [nzData]="VehicleList" [nzPageSize]="10" nzSize="small" [nzLoading]="LoadingVehicle" #VehicleTable>
+      <thead>
+      <tr>
+        <th>CODE</th>
+        <th>TYPE</th>
+        <th>PLATE</th>
+        <th>LAST MAINTENANCE</th>
+        <th>ACTION</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let item of VehicleTable.data">
+        <td>{{item.vehicle_code}}</td>
+        <td>{{item.vehicle_type}}</td>
+        <td>{{item.vehicle_plate}}</td>
+        <td>{{item.vehicle_last_maintenance}}</td>
+        <td class="text-center">
+          <a (click)="onVehicleSelected(item.vehicle_identity, item.vehicle_code)">SELECT</a>
+        </td>
+      </tr>
+      </tbody>
+    </nz-table>
+  </ng-template>
+  <ng-template #vehicleModalFooter></ng-template>
+</nz-modal>
